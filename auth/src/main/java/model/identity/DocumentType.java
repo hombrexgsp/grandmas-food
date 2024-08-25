@@ -1,4 +1,4 @@
-package model;
+package model.identity;
 
 import java.util.Arrays;
 

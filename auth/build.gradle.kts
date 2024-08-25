@@ -28,23 +28,9 @@ dependencies {
     implementation(project(":common"))
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    testImplementation("org.springframework.security:spring-security-test")
-
-    compileOnly(Libraries.lombok)
-    annotationProcessor(Libraries.lombok)
-
-    implementation(Libraries.springboot)
-
-    testImplementation(Testing.springWebflux)
-    testImplementation(Testing.springbootStarter)
     "developmentOnly"("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("com.h2database:h2")
-
-    testRuntimeOnly(Testing.junit)
-
-
+    runtimeOnly("org.postgresql:postgresql")
 
 }
 
@@ -55,5 +41,8 @@ tasks.withType<Test> {
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("--enable-preview")
 }
+
+
+
 
 

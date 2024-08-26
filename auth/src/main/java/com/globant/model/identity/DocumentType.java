@@ -1,4 +1,4 @@
-package model.identity;
+package com.globant.model.identity;
 
 import java.util.Arrays;
 

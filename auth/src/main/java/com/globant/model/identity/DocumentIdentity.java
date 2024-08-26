@@ -1,4 +1,4 @@
-package model.identity;
+package com.globant.model.identity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -6,7 +6,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 @Embeddable
 public class DocumentIdentity {
@@ -15,6 +14,7 @@ public class DocumentIdentity {
     @Enumerated(EnumType.STRING)
     @NotNull
     private DocumentType documentType;
+
     @Column(name = "document_number", nullable = false)
     @NotNull
     @Digits(integer = 20, fraction = 0)

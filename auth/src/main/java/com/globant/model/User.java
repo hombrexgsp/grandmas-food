@@ -1,8 +1,8 @@
-package model;
+package com.globant.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import model.identity.DocumentIdentity;
+import com.globant.model.identity.DocumentIdentity;
 
 
 @Entity
@@ -12,114 +12,102 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Embedded
     private DocumentIdentity document;
 
-    @NotNull
-    @Column(nullable = false)
-    @Size(max = 255)
+    @Column(name = "first_name", nullable = false, length = 255)
     private String firstName;
 
-    @NotNull
-    @Column(nullable = false)
-    @Size(max = 255)
+    @Column(name = "lastname", nullable = false, length = 255)
     private String lastName;
 
-    @Email
-    @Column(nullable = false)
-    @NotNull
-    @Size(max = 255)
+    @Column(nullable = false, length = 255)
     private String email;
 
-    @NotNull
-    @Column(nullable = false)
-    @Digits(integer = 10, fraction = 0)
+    @Column(name = "phone_number", nullable = false, precision = 10, scale = 0)
     private Long phoneNumber;
 
-    @NotNull
-    @Column(nullable = false)
-    @Size(max = 500)
+    @Column(nullable = false, length = 500)
     private String address;
 
-    @NotNull
-    @Column(nullable = false)
+    @Column(nullable = true)
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?.,-])[A-Za-z\\d#$@!%&*?.,-]{8,}$",
             message = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")
     private String password;
 
-    public User(String address, DocumentIdentity document, String email, String firstName, String lastName, String password, Long phoneNumber) {
+
+    public User(String address, DocumentIdentity document, String email, String firstName, String lastName, Long phoneNumber, String password) {
         this.address = address;
         this.document = document;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
         this.phoneNumber = phoneNumber;
+        this.password = password;
     }
 
     public User() {
-    }
-
-    public @NotNull @Size(max = 500) String getAddress() {
-        return address;
-    }
-
-    public void setAddress(@NotNull @Size(max = 500) String address) {
-        this.address = address;
-    }
-
-    public @NotNull DocumentIdentity getDocument() {
-        return document;
-    }
-
-    public void setDocument(@NotNull DocumentIdentity document) {
-        this.document = document;
-    }
-
-    public @Email @NotNull @Size(max = 255) String getEmail() {
-        return email;
-    }
-
-    public void setEmail(@Email @NotNull @Size(max = 255) String email) {
-        this.email = email;
-    }
-
-    public @NotNull @Size(max = 255) String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(@NotNull @Size(max = 255) String firstName) {
-        this.firstName = firstName;
     }
 
     public Long getId() {
         return id;
     }
 
-    public @NotNull @Size(max = 255) String getLastName() {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public DocumentIdentity getDocument() {
+        return document;
+    }
+
+    public void setDocument(DocumentIdentity document) {
+        this.document = document;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(@NotNull @Size(max = 255) String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public @NotNull @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?.,-])[A-Za-z\\d#$@!%&*?.,-]{8,}$",
+    public @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?.,-])[A-Za-z\\d#$@!%&*?.,-]{8,}$",
             message = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.") String getPassword() {
         return password;
     }
 
-    public void setPassword(@NotNull @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?.,-])[A-Za-z\\d#$@!%&*?.,-]{8,}$",
+    public void setPassword(@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?.,-])[A-Za-z\\d#$@!%&*?.,-]{8,}$",
             message = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.") String password) {
         this.password = password;
     }
 
-    public @NotNull @Digits(integer = 10, fraction = 0) Long getPhoneNumber() {
+    public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(@NotNull @Digits(integer = 10, fraction = 0) Long phoneNumber) {
+    public void setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

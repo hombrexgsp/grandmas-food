@@ -4,7 +4,6 @@ plugins {
     id("io.spring.dependency-management") version "1.1.6"
 }
 
-
 group = "com.globant"
 version = "0.0.1-SNAPSHOT"
 
@@ -26,12 +25,21 @@ repositories {
 
 dependencies {
     implementation(project(":common"))
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    "developmentOnly"("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("org.postgresql:postgresql")
+    implementation("org.springframework.boot:spring-boot-starter-web")
 
+    compileOnly(Libraries.lombok)
+    annotationProcessor(Libraries.lombok)
+
+    implementation(Libraries.springboot)
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.postgresql:postgresql")
+
+
+    testImplementation(Testing.springWebflux)
+    testImplementation(Testing.springbootStarter)
+
+    testRuntimeOnly(Testing.junit)
 }
 
 tasks.withType<Test> {
@@ -41,8 +49,4 @@ tasks.withType<Test> {
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("--enable-preview")
 }
-
-
-
-
 

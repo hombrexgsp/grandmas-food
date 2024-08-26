@@ -3,6 +3,8 @@ object Libraries {
     const val springboot = "org.springframework.boot:spring-boot-starter"
     const val spingbootDockerCompose = "org.springframework.boot:spring-boot-docker-compose"
     const val springbootGraphQl = "org.springframework.boot:spring-boot-starter-graphql"
+    const val r2dbc = "io.r2dbc:r2dbc-postgresql"
+
 }
 
 object Testing {

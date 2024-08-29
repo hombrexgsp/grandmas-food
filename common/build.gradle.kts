@@ -28,6 +28,8 @@ dependencies {
     annotationProcessor(Libraries.lombok)
 
     implementation(Libraries.springboot)
+    implementation(Libraries.springbootWeb)
+    implementation(Libraries.springbootValidation)
 
     // Testing
     testImplementation(Testing.springWebflux)

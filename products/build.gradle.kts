@@ -21,15 +21,25 @@ configurations {
 
 repositories {
     mavenCentral()
+
 }
 
 dependencies {
+
     implementation(project(":common"))
 
     compileOnly(Libraries.lombok)
     annotationProcessor(Libraries.lombok)
+    annotationProcessor(Libraries.mapStructProcessor)
+    annotationProcessor(Libraries.vavrMatchProcessor)
 
     implementation(Libraries.springboot)
+    implementation(Libraries.springbootWeb)
+    implementation(Libraries.springbootValidation)
+    implementation(Libraries.springbootMongo)
+    implementation(Libraries.mapStruct)
+    implementation(Libraries.vavr)
+    implementation(Libraries.varvMatch)
 
     testImplementation(Testing.springWebflux)
     testImplementation(Testing.springbootStarter)
@@ -44,3 +54,4 @@ tasks.withType<Test> {
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("--enable-preview")
 }
+

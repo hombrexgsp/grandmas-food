@@ -3,6 +3,14 @@ object Libraries {
     const val springboot = "org.springframework.boot:spring-boot-starter"
     const val spingbootDockerCompose = "org.springframework.boot:spring-boot-docker-compose"
     const val springbootGraphQl = "org.springframework.boot:spring-boot-starter-graphql"
+    const val springbootMongo = "org.springframework.boot:spring-boot-starter-data-mongodb"
+    const val springbootValidation = "org.springframework.boot:spring-boot-starter-validation"
+    const val springbootWeb = "org.springframework.boot:spring-boot-starter-web"
+    const val mapStruct = "org.mapstruct:mapstruct:1.6.0"
+    const val mapStructProcessor = "org.mapstruct:mapstruct-processor:1.6.0"
+    const val vavr = "io.vavr:vavr:0.10.4"
+    const val varvMatch ="io.vavr:vavr-match:0.10.4"
+    const val vavrMatchProcessor = "io.vavr:vavr-match-processor:0.10.4"
 }
 
 object Testing {

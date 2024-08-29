@@ -1,17 +1,12 @@
-version: '3.8'
+name: grandmas-food-stack
 
 services:
-  postgres:
-    image: postgres:14
-    container_name: postgres
-    environment:
-      POSTGRES_DB: GrandmasFood
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 622456mamola
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
 
-volumes:
-    postgres-data:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_DATABASE_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_DATABASE_PASSWORD}

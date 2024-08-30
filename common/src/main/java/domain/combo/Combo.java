@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import java.util.UUID;
 
 public record Combo(
+        @org.hibernate.validator.constraints.UUID
         UUID uuid,
 
         @NotEmpty

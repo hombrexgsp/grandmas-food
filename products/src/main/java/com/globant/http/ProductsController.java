@@ -24,15 +24,6 @@ public class ProductsController {
         this.comboService = comboService;
     }
 
-    @GetMapping("/healthcheck")
-    public String healthCheck() {
-        return """
-                {
-                    "health": "Safe and sound!"
-                }
-                """;
-    }
-
     @GetMapping
     public List<Combo> getAllCombos() {
         return comboService.getAll();

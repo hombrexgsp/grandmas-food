@@ -21,7 +21,9 @@ public interface ComboRepository extends MongoRepository<ComboEntity, ObjectId> 
     Optional<ComboEntity> findByUuid(UUID uuid);
 
     @Query("{'$text': {'$search': ?0}}")
-    List<ComboEntity> findByFantasyName(String text);
+    List<ComboEntity> findByQuery(String text);
+
+    Optional<ComboEntity> findByFantasyName(String fantasyName);
 
     @Query("{'uuid': ?0}")
     @Update("{'$set': ?1}")

@@ -4,7 +4,10 @@ import com.globant.instances.ComboMappable;
 import domain.combo.Combo;
 import domain.combo.CreateCombo;
 import domain.combo.UpdateCombo;
+import domain.combo.error.ComboDuplicatedName;
 import domain.combo.error.ComboNotFound;
+import domain.combo.error.NoComboChanges;
+import io.vavr.control.Option;
 import org.springframework.stereotype.Service;
 import com.globant.repository.ComboRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +48,7 @@ public class ComboService {
     @Transactional(readOnly = true)
     public List<Combo> searchByName(String name) {
         return repository
-                .findByFantasyName(name)
+                .findByQuery(name)
                 .stream()
                 .map(mapper::to)
                 .toList();
@@ -53,14 +56,30 @@ public class ComboService {
 
     @Transactional
     public Combo addCombo(CreateCombo createCombo) {
-          return mapper.to(repository.save(mapper.from(createCombo.toCombo(UUID.randomUUID()))));
+        if (repository.findByFantasyName(createCombo.fantasyName()).isPresent()) {
+            throw new ComboDuplicatedName(
+                    STR."Combo with name \{createCombo.fantasyName()} already exists"
+            );
+        }
+        else return mapper.to(repository.save(mapper.from(createCombo.toCombo(UUID.randomUUID()))));
     }
 
     @Transactional
     public void updateCombo(UUID uuid, UpdateCombo updateCombo) {
-        repository.findByUuid(uuid).ifPresentOrElse(
-                _ -> {
-                    repository.updateByUuid(uuid, mapper.from(updateCombo.toCombo(uuid)));
+        repository.findByUuid(uuid)
+                .ifPresentOrElse(
+                comboEntity -> {
+                    if (mapper.to(comboEntity).equals(updateCombo.toCombo(uuid))) {
+                        throw new NoComboChanges(
+                                STR."No changes detected on inminent update with combo \n \{updateCombo}"
+                        );
+                    }
+                    else if (repository.findByFantasyName(updateCombo.fantasyName()).isPresent()) {
+                        throw new ComboDuplicatedName(
+                                STR."Combo with name \{updateCombo.fantasyName()} already exists"
+                        );
+                    }
+                    else repository.updateByUuid(uuid, mapper.from(updateCombo.toCombo(uuid)));
                 },
                 () -> {
                     throw new ComboNotFound(STR."Combo with uuid \{uuid} not found");
@@ -77,8 +96,6 @@ public class ComboService {
                 }
         );
     }
-
-
 }
 
 

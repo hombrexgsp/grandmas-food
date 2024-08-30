@@ -11,6 +11,7 @@ object Libraries {
     const val vavr = "io.vavr:vavr:0.10.4"
     const val varvMatch ="io.vavr:vavr-match:0.10.4"
     const val vavrMatchProcessor = "io.vavr:vavr-match-processor:0.10.4"
+    const val r2dbc = "io.r2dbc:r2dbc-postgresql"
 }
 
 object Testing {

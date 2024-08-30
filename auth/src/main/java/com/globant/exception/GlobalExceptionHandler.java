@@ -4,6 +4,8 @@ package com.globant.exception;
 import com.globant.exception.customException.DuplicateUserException;
 import com.globant.exception.customException.UserNotFoundException;
 import com.globant.exception.customException.ValidationException;
+import domain.http.error.ErrorCode;
+import domain.http.error.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,7 +21,7 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(
                 userNotFoundException.getErrorCode(),
                 userNotFoundException.getMessage(),
-                userNotFoundException.getClass().getSimpleName()
+                userNotFoundException
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
@@ -30,7 +32,7 @@ public class GlobalExceptionHandler {
      ErrorResponse errorResponse = new ErrorResponse(
        duplicateUserException.getErrorCode(),
        duplicateUserException.getMessage(),
-       duplicateUserException.getClass().getSimpleName()
+       duplicateUserException
      );
      return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
@@ -41,7 +43,7 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(
                 ErrorCode.VALIDATION_ERROR,
                 String.join(", ", validationException.getValidationErrors()),
-                validationException.getClass().getSimpleName()
+                validationException
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
@@ -50,7 +52,7 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(
                 ErrorCode.GENERAL_ERROR,
                 "Idk what's happening, probably is because I'm not Puche",
-                exception.getClass().getSimpleName()
+                exception
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }

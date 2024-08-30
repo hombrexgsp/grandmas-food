@@ -42,6 +42,15 @@ public class ComboService {
                 );
     }
 
+    @Transactional(readOnly = true)
+    public List<Combo> searchByName(String name) {
+        return repository
+                .findByFantasyName(name)
+                .stream()
+                .map(mapper::to)
+                .toList();
+    }
+
     @Transactional
     public Combo addCombo(CreateCombo createCombo) {
           return mapper.to(repository.save(mapper.from(createCombo.toCombo(UUID.randomUUID()))));

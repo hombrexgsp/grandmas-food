@@ -20,11 +20,13 @@ public interface ComboRepository extends MongoRepository<ComboEntity, ObjectId> 
     @Query("{'uuid': ?0}")
     Optional<ComboEntity> findByUuid(UUID uuid);
 
+    @Query("{'$text': {'$search': ?0}}")
+    List<ComboEntity> findByFantasyName(String text);
+
     @Query("{'uuid': ?0}")
     @Update("{'$set': ?1}")
     void updateByUuid(UUID uuid, ComboEntity comboEntity);
 
-    void deleteByUuid(UUID uuid);
 
     @Override
     List<ComboEntity> findAll();

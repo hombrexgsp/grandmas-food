@@ -43,6 +43,11 @@ public class ProductsController {
         return comboService.searchByUuid(uuid);
     }
 
+    @GetMapping("/search")
+    public List<Combo> getByName(@RequestParam("q") String name) {
+        return comboService.searchByName(name);
+    }
+
     @PostMapping
     public ResponseEntity<Combo> addCombo(@Valid @RequestBody CreateCombo createCombo) {
         return ResponseEntity.status(201).body(comboService.addCombo(createCombo));

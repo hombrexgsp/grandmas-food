@@ -1,6 +1,7 @@
 package com.globant.exception.customException;
 
-import com.globant.exception.ErrorCode;
+
+import domain.http.error.ErrorCode;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message){

@@ -1,5 +1,7 @@
 package com.globant.exception.customException;
 
+import domain.http.error.ErrorCode;
+
 import java.util.List;
 
 public class ValidationException extends RuntimeException{
@@ -12,6 +14,10 @@ public class ValidationException extends RuntimeException{
 
     public List<String> getValidationErrors(){
         return validationErrors;
+    }
+
+    public ErrorCode getErrorCode(){
+        return ErrorCode.VALIDATION_ERROR;
     }
 
 }

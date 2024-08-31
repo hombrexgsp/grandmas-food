@@ -8,17 +8,14 @@ import org.springframework.web.bind.annotation.*;
 import com.globant.service.UserService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
-    private final UserServiceImpl userServiceImpl;
 
-    public UserController(UserService userService, UserServiceImpl userServiceImpl) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userServiceImpl = userServiceImpl;
     }
 
     @PostMapping
@@ -30,13 +27,13 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers(){
         List<UserDto> users = userService.getAllUsersSorted();
-        return ResponseEntity.status(200).body(users);
+        return ResponseEntity.ok(users);
     }
 
-    @GetMapping("/{documentNumber}")
+    @GetMapping("/document/{documentNumber}")
     public ResponseEntity<UserDto> getUserByDocumentNumber(@PathVariable Long documentNumber){
-        Optional<UserDto>  userDto = userService.getUserByDocumentNumber(documentNumber);
-        return userDto.map(ResponseEntity::ok).orElseGet(()-> ResponseEntity.notFound().build());
+        UserDto userDto = userService.getUserByDocumentNumber(documentNumber);
+        return ResponseEntity.ok(userDto);
     }
 
     @PutMapping("/{documentNumber}")
@@ -49,6 +46,16 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long documentNumber){
         userService.deleteUser(documentNumber);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping("/name/{firstName}")
+    public ResponseEntity<List<UserDto>> getUserByFirstName(@PathVariable String firstName){
+        List<UserDto> users = userService.findUserByNameContaining(firstName);
+        if(users.isEmpty()){
+            return ResponseEntity.notFound().build();
+        } else{
+            return ResponseEntity.ok(users);
+        }
     }
 
 

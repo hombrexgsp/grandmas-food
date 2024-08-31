@@ -1,9 +1,7 @@
 package com.globant.exception;
 
 
-import com.globant.exception.customException.DuplicateUserException;
-import com.globant.exception.customException.UserNotFoundException;
-import com.globant.exception.customException.ValidationException;
+import com.globant.exception.customException.*;
 import domain.http.error.ErrorCode;
 import domain.http.error.ErrorResponse;
 import org.springframework.http.HttpStatus;
@@ -42,7 +40,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleValidationException(ValidationException validationException){
         ErrorResponse errorResponse = new ErrorResponse(
                 ErrorCode.VALIDATION_ERROR,
-                String.join(", ", validationException.getValidationErrors()),
+                validationException.getMessage(),
                 validationException
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
@@ -51,10 +49,33 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleGeneralException(Exception exception){
         ErrorResponse errorResponse = new ErrorResponse(
                 ErrorCode.GENERAL_ERROR,
-                "Idk what's happening, probably is because I'm not Puche",
+                "Idk what's happening, probably is because we are not Puche",
                 exception
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler({InvalidOrIncompleteUserException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handleInvaliOrIncompleteUserException(InvalidOrIncompleteUserException invalidOrIncompleteUserException){
+        ErrorResponse errorResponse = new ErrorResponse(
+                ErrorCode.VALIDATION_ERROR,
+                invalidOrIncompleteUserException.getMessage(),
+                invalidOrIncompleteUserException
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({NotFieldsUpdatedException.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<ErrorResponse> handleNotFieldsUpdatedException(NotFieldsUpdatedException notFieldsUpdatedException){
+        ErrorResponse errorResponse = new ErrorResponse(
+                ErrorCode.NOT_FIELDS_UPDATED,
+                notFieldsUpdatedException.getMessage(),
+                notFieldsUpdatedException
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
 
 }

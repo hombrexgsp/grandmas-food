@@ -10,6 +10,9 @@ public enum ErrorCode {
     // User
     USER_NOT_FOUND("E1001"),
     DUPLICATE_USER("E1002"),
+    NOT_FIELDS_UPDATED("E1003"),
+    INVALID_OR_INCOMPLETE_USER_VALUES("E1004"),
+
 
     // Product
     PRODUCT_NOT_FOUND("E2001"),

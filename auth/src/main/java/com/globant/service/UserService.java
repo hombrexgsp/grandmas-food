@@ -12,7 +12,7 @@ public interface UserService {
     UserDto createUser(UserDto userDto);
 
     //Should I add the document type in parameters?
-    Optional<UserDto> getUserByDocumentNumber(Long documentNumber);
+    UserDto getUserByDocumentNumber(Long documentNumber);
 
     UserDto updateUser(Long documentNumber, UserDto userDto);
 
@@ -22,4 +22,5 @@ public interface UserService {
 
     List<UserDto> getAllUsersSorted();
 
+    List<UserDto> findUserByNameContaining(String firstName);
 }

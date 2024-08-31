@@ -15,8 +15,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.document.documentNumber =:documentNumber")
     Optional<User> findUserByDocumentNumber(@Param("documentNumber") Long documentNumber);
 
-    @Query("SELECT u FROM User u WHERE u.firstName LIKE %:name%")
-    Optional<User> findUserByNameContaining(@Param("name") String name);
+    //… where x.firstname like ?1
+    @Query("SELECT u FROM User u WHERE LOWER(u.firstName) LIKE LOWER(CONCAT('%', :firstName, '%'))")
+    List<User> findUserByNameContaining(@Param("firstName") String firstName);
 
     @Query("SELECT u FROM User u ORDER BY u.firstName")
     List<User> getAllUsersSorted();

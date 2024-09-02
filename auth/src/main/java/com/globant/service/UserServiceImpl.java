@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.globant.repository.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.Document;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,6 +31,17 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
+    private boolean isUserDtoInvalidOrIncomplete(UserDto userDto) {
+        return userDto.getFirstName() == null || userDto.getFirstName().isEmpty()
+                || userDto.getLastName() == null || userDto.getLastName().isEmpty()
+                || userDto.getEmail() == null || userDto.getEmail().isEmpty()
+                || userDto.getPhoneNumber() == null
+                || userDto.getAddress() == null || userDto.getAddress().isEmpty()
+                || userDto.getDocumentIdentity() == null
+                || userDto.getDocumentIdentity().getDocumentType() == null
+                || userDto.getDocumentIdentity().getDocumentNumber() == null;
+    }
+
     @Override
     @Transactional
     public UserDto createUser(UserDto userDto) {
@@ -37,11 +49,11 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsByDocumentDocumentNumber(documentIdentity.getDocumentNumber())) {
             throw new DuplicateUserException("User with document: " + documentIdentity.getDocumentNumber() + " already exists");
         }
-
-        User newUser = userMapper.toEntity(userDto);
-        User savedUser = userRepository.save(newUser);
+            User newUser = userMapper.toEntity(userDto);
+            User savedUser = userRepository.save(newUser);
 
         return userMapper.toDto(savedUser);
+
     }
 
 
@@ -52,11 +64,11 @@ public class UserServiceImpl implements UserService {
         User existingUser = userRepository.findUserByDocumentNumber(documentNumber)
                 .orElseThrow(() -> new UserNotFoundException("User with document number: " + documentNumber + " not found."));
 
-        if (userDto.getFirstName() == null || userDto.getFirstName().isEmpty()
-                || userDto.getLastName() == null || userDto.getLastName().isEmpty()
-                || userDto.getEmail() == null || userDto.getEmail().isEmpty()
-                || userDto.getPhoneNumber() == null
-                || userDto.getAddress() == null || userDto.getAddress().isEmpty()) {
+        if(!documentNumber.equals(userDto.getDocumentIdentity().getDocumentNumber())){
+            throw new InvalidOrIncompleteUserException("Document number cannot be changed");
+        }
+
+        if (isUserDtoInvalidOrIncomplete(userDto)) {
             throw new InvalidOrIncompleteUserException("Values of the customer are invalid or incomplete");
         }
 
@@ -95,8 +107,15 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public UserDto getUserByDocumentNumber(Long documentNumber) {
-        return userRepository.findUserByDocumentNumber(documentNumber).map(userMapper::toDto)
-                .orElseThrow(() -> new UserNotFoundException("User with document " + documentNumber + " not found."));
+        return Optional.ofNullable(documentNumber).
+                filter(docNum -> docNum > 0)
+                .map(docNum -> userRepository.findUserByDocumentNumber(docNum)
+                        .map(userMapper::toDto)
+                        .orElseThrow(() -> new UserNotFoundException("User with document " + documentNumber + " not found")))
+                .orElseThrow(() -> new InvalidOrIncompleteUserException("Invalid or incomplete document number (must be a number, without characters"));
+
+                //userRepository.findUserByDocumentNumber(documentNumber).map(userMapper::toDto)
+                //.orElseThrow(() -> new UserNotFoundException("User with document " + documentNumber + " not found."));
 
     }
 

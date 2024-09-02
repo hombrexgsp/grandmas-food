@@ -46,18 +46,20 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    public ResponseEntity<ErrorResponse> handleGeneralException(Exception exception){
-        ErrorResponse errorResponse = new ErrorResponse(
-                ErrorCode.GENERAL_ERROR,
-                "Idk what's happening, probably is because we are not Puche",
-                exception
-        );
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    public ResponseEntity<ErrorResponse> handleGeneralException(Exception exception){
+//        ErrorResponse errorResponse = new ErrorResponse(
+//                ErrorCode.GENERAL_ERROR,
+//                "Idk what's happening...",
+//                exception
+//        );
+//        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 
     @ExceptionHandler({InvalidOrIncompleteUserException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorResponse> handleInvaliOrIncompleteUserException(InvalidOrIncompleteUserException invalidOrIncompleteUserException){
+    public ResponseEntity<ErrorResponse> handleInvalidOrIncompleteUserException(InvalidOrIncompleteUserException invalidOrIncompleteUserException){
         ErrorResponse errorResponse = new ErrorResponse(
                 ErrorCode.VALIDATION_ERROR,
                 invalidOrIncompleteUserException.getMessage(),

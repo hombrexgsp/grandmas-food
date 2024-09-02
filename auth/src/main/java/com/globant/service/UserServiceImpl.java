@@ -143,7 +143,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> findUserByNameContaining(String firstName) {
-        return userRepository.findUserByNameContaining(firstName)
+
+        List<UserDto> users = userRepository.findUserByNameContaining(firstName)
                 .stream().map(userMapper::toDto).collect(Collectors.toList());
+
+        if(users.isEmpty()){
+            throw new UserNotFoundException("Users with first name '" + firstName + "' not found.");
+        }
+
+        return users;
     }
 }

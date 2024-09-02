@@ -33,6 +33,8 @@ dependencies {
     annotationProcessor(Libraries.mapStructProcessor)
     annotationProcessor(Libraries.vavrMatchProcessor)
 
+    implementation("org.apache.pdfbox:pdfbox:2.0.28")
+
     implementation(Libraries.springboot)
     implementation(Libraries.springbootWeb)
     implementation(Libraries.springbootValidation)

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.globant.repository.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.Document;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

@@ -46,16 +46,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
-//    @ExceptionHandler
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    public ResponseEntity<ErrorResponse> handleGeneralException(Exception exception){
-//        ErrorResponse errorResponse = new ErrorResponse(
-//                ErrorCode.GENERAL_ERROR,
-//                "Idk what's happening...",
-//                exception
-//        );
-//        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<ErrorResponse> handleGeneralException(Exception exception){
+        ErrorResponse errorResponse = new ErrorResponse(
+                ErrorCode.GENERAL_ERROR,
+                exception.getMessage(),
+                exception
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     @ExceptionHandler({InvalidOrIncompleteUserException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)

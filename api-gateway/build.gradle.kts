@@ -29,6 +29,8 @@ dependencies {
     compileOnly(Libraries.lombok)
     annotationProcessor(Libraries.lombok)
 
+
+    implementation(Libraries.gql)
     implementation(Libraries.springboot)
     implementation(Libraries.springbootGraphQl)
 

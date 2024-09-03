@@ -14,7 +14,6 @@ import com.globant.repository.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,6 +43,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto createUser(UserDto userDto) {
+        if(isUserDtoInvalidOrIncomplete(userDto)){
+            throw new InvalidOrIncompleteUserException("User data is invalid or incomplete");
+        }
+
         DocumentIdentity documentIdentity = userDto.getDocumentIdentity();
         if (userRepository.existsByDocumentDocumentNumber(documentIdentity.getDocumentNumber())) {
             throw new DuplicateUserException("User with document: " + documentIdentity.getDocumentNumber() + " already exists");
@@ -106,15 +109,14 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public UserDto getUserByDocumentNumber(Long documentNumber) {
-        return Optional.ofNullable(documentNumber).
-                filter(docNum -> docNum > 0)
-                .map(docNum -> userRepository.findUserByDocumentNumber(docNum)
-                        .map(userMapper::toDto)
-                        .orElseThrow(() -> new UserNotFoundException("User with document " + documentNumber + " not found")))
-                .orElseThrow(() -> new InvalidOrIncompleteUserException("Invalid or incomplete document number (must be a number, without characters"));
 
-                //userRepository.findUserByDocumentNumber(documentNumber).map(userMapper::toDto)
-                //.orElseThrow(() -> new UserNotFoundException("User with document " + documentNumber + " not found."));
+        if(documentNumber == null || documentNumber <=0){
+            throw new InvalidOrIncompleteUserException("Document number is invalid or incomplete");
+        }
+
+        return userRepository.findUserByDocumentNumber(documentNumber)
+                .map(userMapper::toDto)
+                .orElseThrow(() -> new UserNotFoundException("User with document number: " + documentNumber + " not found."));
 
     }
 

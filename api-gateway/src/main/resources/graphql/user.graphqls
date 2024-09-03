@@ -1,0 +1,57 @@
+enum DocumentType{
+    CC
+    TI
+    PASSPORT
+    CE
+}
+
+
+
+type DocumentIdentity{
+    documentType: DocumentType
+    documentNumber: ID
+}
+
+type User {
+    documentIdentity: DocumentIdentity
+    firstName: String
+    lastName: String
+    email: String
+    phoneNumber: String
+    address: String
+}
+
+input CreateUserInput{
+    documentIdentity: DocumentType!
+    firstName : String!
+    lastName: String!
+    email: String!
+    phoneNumber: String!
+    address: String!
+}
+
+input UpdateUserInput{
+    firstName: String
+    lastName: String
+    email: String
+    phoneNumber: String
+    address: String
+}
+
+extend type Mutation{
+    createUser(input: CreateUserInput!): User
+    updateUser(documentNumber: String!, input: UpdateUserInput!): User
+    deleteUser(documentNumber: String!): Boolean
+}
+
+extend type Query{
+    allUsers: [User]
+    userByuDocumentNumber(documentNumber: String!): User
+    userByFirstName(firstName: String!): [User]
+}
+
+
+
+
+
+

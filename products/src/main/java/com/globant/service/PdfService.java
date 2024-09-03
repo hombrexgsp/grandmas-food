@@ -21,16 +21,29 @@ public class PdfService {
 
             try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
                 contentStream.beginText();
-                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 35);
                 contentStream.setLeading(14.5f);
-                contentStream.newLineAtOffset(25, 700);
-                contentStream.showText("Menu");
-                contentStream.newLine();
+                contentStream.newLineAtOffset(200, 750);
+                contentStream.showText("Menu - GrandmasFood");
+                contentStream.endText();
+
+                contentStream.moveTo(25,740);
+                contentStream.lineTo(575,740);
+                contentStream.stroke();
+
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                contentStream.setLeading(14.5f);
+                contentStream.newLineAtOffset(100, 700);
 
                 for (Combo combo : combos) {
-                    contentStream.showText(combo.fantasyName() + " - " + combo.price() + " USD");
+                    contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                    contentStream.showText(combo.fantasyName() + " $ " + combo.price() + " COP");
                     contentStream.newLine();
+
+                    contentStream.setFont(PDType1Font.HELVETICA, 12);
                     contentStream.showText(combo.description());
+                    contentStream.newLine();
                     contentStream.newLine();
                 }
 

@@ -38,6 +38,7 @@ dependencies {
 
     testImplementation(Testing.springWebflux)
     testImplementation(Testing.springbootStarter)
+    "developmentOnly"("org.springframework.boot:spring-boot-devtools")
 
     testRuntimeOnly(Testing.junit)
 }

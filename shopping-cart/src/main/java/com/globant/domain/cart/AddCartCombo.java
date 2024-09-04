@@ -12,5 +12,4 @@ public record AddCartCombo(
 
         @NotNull @Positive
         Integer quantity
-) {
-}
+) {}

@@ -1,4 +1,4 @@
-package com.globant.domain;
+package com.globant.domain.combo;
 
 import domain.combo.Category;
 import lombok.Data;

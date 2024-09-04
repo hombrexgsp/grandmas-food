@@ -25,16 +25,24 @@ repositories {
 
 dependencies {
     implementation(project(":common"))
+    implementation("org.springframework.boot:spring-boot-devtools")
 
-    compileOnly(Libraries.lombok)
-    annotationProcessor(Libraries.lombok)
 
-    implementation(Libraries.springboot)
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-    testImplementation(Testing.springWebflux)
-    testImplementation(Testing.springbootStarter)
+    runtimeOnly("org.postgresql:postgresql:42.5.0")
 
-    testRuntimeOnly(Testing.junit)
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor(Libraries.mapStructProcessor)
+    implementation(Libraries.mapStruct)
+
+    runtimeOnly("com.h2database:h2")
+
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
 tasks.withType<Test> {
@@ -43,4 +51,8 @@ tasks.withType<Test> {
 
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("--enable-preview")
+}
+
+springBoot {
+    mainClass.set("com.globant.apigateway.ApiGatewayApplication")
 }

@@ -1,10 +1,11 @@
 package com.globant.dto;
 
+import com.globant.model.identity.DocumentIdentity;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import com.globant.model.identity.DocumentIdentity;
+
 
 public class UserDto {
 

@@ -13,7 +13,7 @@ object Libraries {
     const val vavrMatchProcessor = "io.vavr:vavr-match-processor:0.10.4"
     const val r2dbc = "io.r2dbc:r2dbc-postgresql"
     const val springbootGraphQl = "org.springframework.boot:spring-boot-starter-graphql"
-    const val graphQlJavaTools = "com.graphql-java-kickstart:graphql-java-tools:12.0.0"
+    const val graphQlJavaTools = "com.graphql-java-kickstart:graphql-java-tools:13.1.1"
 
 
 }

@@ -79,4 +79,9 @@ public class UserController {
         return userResolver.deleteUser(documentNumber);
     }
 
+    @QueryMapping
+    public List<User> userByFirstName(@Argument("firstName") String firstName){
+        return userResolver.getUserByFirstName(firstName);
+    }
+
 }

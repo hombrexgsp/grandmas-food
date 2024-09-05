@@ -46,12 +46,19 @@ public class UserResolver{
 
     }
 
-    public User getUserByDocumentNumber(String documentNumber){
-            return userClient.get()
-                    .uri("/document/{documentNumber}", documentNumber)
-                    .retrieve()
-                    .body(User.class);
-        }
+    public User getUserByDocumentNumber(String documentNumber) {
+        return userClient.get()
+                .uri("/document/{documentNumber}", documentNumber)
+                .retrieve()
+                .body(User.class);
+    }
+
+    public List<User> getUserByFirstName(String firstName){
+        return userClient.get()
+                .uri("/name/{firstName}", firstName)
+                .retrieve()
+                .body(new ParameterizedTypeReference<List<User>>() {});
+    }
 
 
 }

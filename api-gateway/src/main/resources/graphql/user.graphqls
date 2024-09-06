@@ -5,24 +5,27 @@ enum DocumentType{
     CE
 }
 
-
-
 type DocumentIdentity{
-    documentType: DocumentType
-    documentNumber: ID
+    documentType: DocumentType!
+    documentNumber: ID!
 }
 
 type User {
-    documentIdentity: DocumentIdentity
-    firstName: String
-    lastName: String
-    email: String
-    phoneNumber: String
-    address: String
+    documentIdentity: DocumentIdentity!
+    firstName: String!
+    lastName: String!
+    email: String!
+    phoneNumber: String!
+    address: String!
+}
+
+input DocumentIdentityInput{
+    documentType: DocumentType!
+    documentNumber: ID!
 }
 
 input CreateUserInput{
-    documentIdentity: DocumentType!
+    documentIdentity: DocumentIdentityInput!
     firstName : String!
     lastName: String!
     email: String!
@@ -38,15 +41,15 @@ input UpdateUserInput{
     address: String
 }
 
-extend type Mutation{
+type Mutation{
     createUser(input: CreateUserInput!): User
     updateUser(documentNumber: String!, input: UpdateUserInput!): User
     deleteUser(documentNumber: String!): Boolean
 }
 
-extend type Query{
+type Query{
     allUsers: [User]
-    userByuDocumentNumber(documentNumber: String!): User
+    userByDocumentNumber(documentNumber: String!): User
     userByFirstName(firstName: String!): [User]
 }
 

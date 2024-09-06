@@ -1,8 +1,8 @@
 object Libraries {
     const val lombok = "org.projectlombok:lombok"
     const val springboot = "org.springframework.boot:spring-boot-starter"
+    const val springbootDevtools = "org.springframework.boot:spring-boot-devtools"
     const val spingbootDockerCompose = "org.springframework.boot:spring-boot-docker-compose"
-    const val springbootGraphQl = "org.springframework.boot:spring-boot-starter-graphql"
     const val springbootMongo = "org.springframework.boot:spring-boot-starter-data-mongodb"
     const val springbootValidation = "org.springframework.boot:spring-boot-starter-validation"
     const val springbootWeb = "org.springframework.boot:spring-boot-starter-web"

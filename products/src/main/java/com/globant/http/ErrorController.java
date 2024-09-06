@@ -1,8 +1,8 @@
 package com.globant.http;
 
-import domain.combo.error.ComboDuplicatedName;
-import domain.combo.error.ComboNotFound;
-import domain.combo.error.NoComboChanges;
+import domain.combo.error.ComboException.ComboDuplicatedName;
+import domain.combo.error.ComboException.ComboNotFound;
+import domain.combo.error.ComboException.NoComboChanges;
 import domain.http.error.ErrorCode;
 import domain.http.error.ErrorResponse;
 import jakarta.validation.ValidationException;

@@ -1,6 +1,7 @@
-package com.globant.resolver;
+package com.globant.resolvers.implementations;
 
 import com.globant.domain.user.User;
+import com.globant.resolvers.UserResolver;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -8,11 +9,11 @@ import org.springframework.web.client.RestClient;
 import java.util.List;
 
 @Component
-public class UserResolver{
+public class UserResolverImp implements UserResolver {
 
     private final RestClient userClient;
 
-    public UserResolver(RestClient.Builder restClientBuilder) {
+    public UserResolverImp(RestClient.Builder restClientBuilder) {
         this.userClient = restClientBuilder.baseUrl("http://localhost:8083/users").build();
     }
 
@@ -59,6 +60,8 @@ public class UserResolver{
                 .retrieve()
                 .body(new ParameterizedTypeReference<List<User>>() {});
     }
+
+
 
 
 }

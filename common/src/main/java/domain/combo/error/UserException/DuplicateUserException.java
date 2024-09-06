@@ -1,4 +1,4 @@
-package com.globant.exception.customException;
+package domain.combo.error.UserException;
 
 
 import domain.http.error.ErrorCode;

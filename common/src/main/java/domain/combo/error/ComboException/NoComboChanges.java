@@ -1,4 +1,4 @@
-package domain.combo.error;
+package domain.combo.error.ComboException;
 
 public class NoComboChanges extends RuntimeException {
     public NoComboChanges(String message) {

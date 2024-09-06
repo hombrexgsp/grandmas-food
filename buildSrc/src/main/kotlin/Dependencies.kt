@@ -5,7 +5,6 @@ object Libraries {
     const val spingbootDockerCompose = "org.springframework.boot:spring-boot-docker-compose"
     const val springbootMongo = "org.springframework.boot:spring-boot-starter-data-mongodb"
     const val springbootGraphQl = "org.springframework.boot:spring-boot-starter-graphql"
-    const val springbootMongo = "org.springframework.boot:spring-boot-starter-data-mongodb"
     const val springbootRedis = "org.springframework.boot:spring-boot-starter-data-redis"
     const val springbootValidation = "org.springframework.boot:spring-boot-starter-validation"
     const val springbootWeb = "org.springframework.boot:spring-boot-starter-web"

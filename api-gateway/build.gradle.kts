@@ -29,10 +29,9 @@ dependencies {
     compileOnly(Libraries.lombok)
     annotationProcessor(Libraries.lombok)
 
-
-    implementation(Libraries.gql)
     implementation(Libraries.springboot)
     implementation(Libraries.springbootGraphQl)
+    implementation(Libraries.vavr)
 
     testImplementation(Testing.springWebflux)
     testImplementation(Testing.springbootStarter)

@@ -1,5 +1,6 @@
-package domain.user;
+package com.globant.domain.user;
 
+import domain.user.DocumentIdentity;
 import lombok.Data;
 
 @Data

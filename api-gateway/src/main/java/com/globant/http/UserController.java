@@ -4,10 +4,10 @@ import com.globant.domain.user.User;
 import com.globant.resolver.UserResolver;
 
 
-import domain.user.CreateUserInput;
+import com.globant.domain.user.CreateUserInput;
 
 import domain.user.DocumentIdentity;
-import domain.user.UpdateUserInput;
+import com.globant.domain.user.UpdateUserInput;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

@@ -1,5 +1,6 @@
-package domain.user;
+package com.globant.domain.user;
 
+import domain.user.DocumentType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

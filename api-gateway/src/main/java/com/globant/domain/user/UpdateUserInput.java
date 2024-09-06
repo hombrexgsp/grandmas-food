@@ -1,4 +1,4 @@
-package domain.user;
+package com.globant.domain.user;
 
 public record UpdateUserInput(
      String firstName,

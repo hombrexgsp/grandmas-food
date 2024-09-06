@@ -28,8 +28,16 @@ dependencies {
 
     compileOnly(Libraries.lombok)
     annotationProcessor(Libraries.lombok)
+    annotationProcessor(Libraries.mapStructProcessor)
 
     implementation(Libraries.springboot)
+    implementation(Libraries.springbootWeb)
+    implementation(Libraries.springbootValidation)
+    implementation(Libraries.springbootMongo)
+    implementation(Libraries.springbootRedis)
+    implementation(Libraries.mapStruct)
+    implementation(Libraries.vavr)
+    implementation(Libraries.jedis)
 
     testImplementation(Testing.springWebflux)
     testImplementation(Testing.springbootStarter)

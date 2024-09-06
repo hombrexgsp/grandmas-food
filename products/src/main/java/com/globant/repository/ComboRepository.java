@@ -1,6 +1,6 @@
 package com.globant.repository;
 
-import com.globant.domain.ComboEntity;
+import com.globant.domain.combo.ComboEntity;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

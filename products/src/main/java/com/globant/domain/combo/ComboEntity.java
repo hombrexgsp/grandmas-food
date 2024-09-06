@@ -1,9 +1,8 @@
-package com.globant.domain;
+package com.globant.domain.combo;
 
 import domain.combo.Category;
 import lombok.Data;
 import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -16,7 +15,6 @@ public class ComboEntity {
     @MongoId
     private ObjectId id;
     private final UUID uuid;
-    @TextIndexed
     private final String fantasyName;
     private final Category category;
     private final String description;

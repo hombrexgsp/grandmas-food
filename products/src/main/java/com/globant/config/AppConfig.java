@@ -1,6 +1,6 @@
 package com.globant.config;
 
-import com.globant.application.GenerateMenuPdf;
+import com.globant.components.GenerateMenuPdf;
 import com.globant.service.ComboService;
 import com.globant.service.PdfService;
 import org.springframework.context.annotation.Bean;

@@ -1,7 +1,7 @@
 package com.globant.http;
 
 
-import com.globant.application.GenerateMenuPdf;
+import com.globant.components.GenerateMenuPdf;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

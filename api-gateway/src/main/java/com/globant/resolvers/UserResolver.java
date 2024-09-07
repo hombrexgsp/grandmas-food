@@ -1,4 +1,4 @@
-package com.globant.resolver;
+package com.globant.resolvers;
 
 import com.globant.domain.user.User;
 import org.springframework.core.ParameterizedTypeReference;

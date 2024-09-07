@@ -1,7 +1,7 @@
 package com.globant.http;
 
 import com.globant.domain.user.User;
-import com.globant.resolver.UserResolver;
+import com.globant.resolvers.UserResolver;
 
 
 import com.globant.domain.user.CreateUserInput;

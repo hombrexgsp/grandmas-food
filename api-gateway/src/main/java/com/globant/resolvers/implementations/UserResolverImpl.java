@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:api-gateway/src/main/java/com/globant/resolvers/UserResolver.java
-package com.globant.resolvers;
-========
 package com.globant.resolvers.implementations;
->>>>>>>> origin/api-gateway:api-gateway/src/main/java/com/globant/resolvers/implementations/UserResolverImp.java
 
 import com.globant.domain.user.User;
 import com.globant.resolvers.UserResolver;
@@ -13,11 +9,11 @@ import org.springframework.web.client.RestClient;
 import java.util.List;
 
 @Component
-public class UserResolverImp implements UserResolver {
+public class UserResolverImpl implements UserResolver {
 
     private final RestClient userClient;
 
-    public UserResolverImp(RestClient.Builder restClientBuilder) {
+    public UserResolverImpl(RestClient.Builder restClientBuilder) {
         this.userClient = restClientBuilder.baseUrl("http://localhost:8083/users").build();
     }
 

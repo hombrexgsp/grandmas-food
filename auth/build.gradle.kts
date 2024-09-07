@@ -34,10 +34,6 @@ dependencies {
     implementation(Libraries.postgresql)
     implementation(Libraries.springbootDevtools)
     implementation(Libraries.swagger)
-    implementation(Libraries.springfox)
-
-
-
 
     testImplementation(Testing.springWebflux)
     testImplementation(Testing.springbootStarter)
@@ -53,4 +49,3 @@ tasks.withType<Test> {
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("--enable-preview")
 }
-

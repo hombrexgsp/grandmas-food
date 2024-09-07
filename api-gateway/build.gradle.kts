@@ -33,6 +33,7 @@ dependencies {
     implementation(Libraries.springbootGraphQl)
     implementation(Libraries.springbootValidation)
     implementation(Libraries.vavr)
+    implementation(Libraries.swagger)
 
     testImplementation(Testing.springWebflux)
     testImplementation(Testing.springbootStarter)

@@ -30,6 +30,7 @@ dependencies {
     annotationProcessor(Libraries.lombok)
 
     implementation(Libraries.springboot)
+    implementation(Libraries.swagger)
 
     testImplementation(Testing.springWebflux)
     testImplementation(Testing.springbootStarter)

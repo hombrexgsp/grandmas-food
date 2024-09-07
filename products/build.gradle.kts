@@ -42,6 +42,7 @@ dependencies {
     implementation(Libraries.mapStruct)
     implementation(Libraries.vavr)
     implementation(Libraries.varvMatch)
+    implementation(Libraries.swagger)
 
     testImplementation(Testing.springWebflux)
     testImplementation(Testing.springbootStarter)

@@ -15,10 +15,9 @@ object Libraries {
     const val vavrMatchProcessor = "io.vavr:vavr-match-processor:0.10.4"
     const val r2dbc = "io.r2dbc:r2dbc-postgresql"
     const val jedis = "redis.clients:jedis"
-    const val swagger = "org.springdoc:springdoc-openapi-ui:1.8.0"
-    const val springfox = "io.springfox:springfox-boot-starter:3.0.0"
     const val dataJpa = "org.springframework.boot:spring-boot-starter-data-jpa"
     const val postgresql = "org.postgresql:postgresql"
+    const val swagger = "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0"
 }
 
 object Testing {

@@ -38,7 +38,7 @@ public class PdfService {
 
                 for (Combo combo : combos) {
                     contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
-                    contentStream.showText(combo.fantasyName() + " $ " + combo.price() + " COP");
+                    contentStream.showText(STR."\{combo.fantasyName()} $ \{combo.price()} COP");
                     contentStream.newLine();
 
                     contentStream.setFont(PDType1Font.HELVETICA, 12);

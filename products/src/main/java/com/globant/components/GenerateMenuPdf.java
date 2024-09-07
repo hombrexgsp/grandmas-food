@@ -1,4 +1,4 @@
-package com.globant.application;
+package com.globant.components;
 
 import com.globant.service.ComboService;
 import com.globant.service.PdfService;

@@ -20,7 +20,7 @@ public class CartRepositoryImpl implements CartRepository {
 
     @Override
     public void addProduct(String userId, String productId, String quantity) {
-        redis.opsForHash().putIfAbsent(userId, productId, quantity);
+        redis.opsForHash().put(userId, productId, quantity);
     }
 
     @Override

@@ -31,16 +31,14 @@ dependencies {
 
     implementation(Libraries.springboot)
     implementation(Libraries.springbootGraphQl)
+    implementation(Libraries.springbootValidation)
     implementation(Libraries.vavr)
 
     testImplementation(Testing.springWebflux)
     testImplementation(Testing.springbootStarter)
     testImplementation(Testing.springbootGraphQl)
 
-
-
     testRuntimeOnly(Testing.junit)
-
 }
 
 tasks.withType<Test> {

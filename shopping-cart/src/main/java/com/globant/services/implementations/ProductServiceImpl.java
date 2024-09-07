@@ -4,7 +4,7 @@ import com.globant.instances.ComboMappable;
 import com.globant.repository.ProductRepository;
 import com.globant.services.ProductService;
 import domain.combo.Combo;
-import domain.combo.error.ComboNotFound;
+import domain.combo.error.ComboException.ComboNotFound;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

@@ -1,10 +1,10 @@
 package com.globant.service;
 
 import com.globant.dto.UserDto;
-import com.globant.exception.customException.DuplicateUserException;
-import com.globant.exception.customException.InvalidOrIncompleteUserException;
-import com.globant.exception.customException.NotFieldsUpdatedException;
-import com.globant.exception.customException.UserNotFoundException;
+import domain.combo.error.UserException.DuplicateUserException;
+import domain.combo.error.UserException.InvalidOrIncompleteUserException;
+import domain.combo.error.UserException.NotFieldsUpdatedException;
+import domain.combo.error.UserException.UserNotFoundException;
 import com.globant.mapper.UserMapper;
 import com.globant.model.User;
 import com.globant.model.identity.DocumentIdentity;

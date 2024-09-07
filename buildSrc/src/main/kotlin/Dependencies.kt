@@ -4,7 +4,6 @@ object Libraries {
     const val springbootDevtools = "org.springframework.boot:spring-boot-devtools"
     const val spingbootDockerCompose = "org.springframework.boot:spring-boot-docker-compose"
     const val springbootGraphQl = "org.springframework.boot:spring-boot-starter-graphql"
-    const val springbootMongo = "org.springframework.boot:spring-boot-starter-data-mongodb"
     const val springbootRedis = "org.springframework.boot:spring-boot-starter-data-redis"
     const val springbootValidation = "org.springframework.boot:spring-boot-starter-validation"
     const val springbootWeb = "org.springframework.boot:spring-boot-starter-web"
@@ -15,6 +14,10 @@ object Libraries {
     const val vavrMatchProcessor = "io.vavr:vavr-match-processor:0.10.4"
     const val r2dbc = "io.r2dbc:r2dbc-postgresql"
     const val jedis = "redis.clients:jedis"
+    const val swagger = "org.springdoc:springdoc-openapi-ui:1.8.0"
+    const val springfox = "io.springfox:springfox-boot-starter:3.0.0"
+    const val dataJpa = "org.springframework.boot:spring-boot-starter-data-jpa"
+    const val postgresql = "org.postgresql:postgresql"
 }
 
 object Testing {

@@ -1,7 +1,7 @@
 package com.globant.exception;
 
 
-import com.globant.exception.customException.*;
+import domain.combo.error.UserException.*;
 import domain.http.error.ErrorCode;
 import domain.http.error.ErrorResponse;
 import org.springframework.http.HttpStatus;

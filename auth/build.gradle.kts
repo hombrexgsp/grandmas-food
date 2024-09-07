@@ -25,15 +25,18 @@ repositories {
 
 dependencies {
     implementation(project(":common"))
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-
+    implementation(Libraries.springbootValidation)
+    implementation(Libraries.springbootWeb)
     compileOnly(Libraries.lombok)
     annotationProcessor(Libraries.lombok)
-
     implementation(Libraries.springboot)
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.postgresql:postgresql")
+    implementation(Libraries.dataJpa)
+    implementation(Libraries.postgresql)
+    implementation(Libraries.springbootDevtools)
+    implementation(Libraries.swagger)
+    implementation(Libraries.springfox)
+
+
 
 
     testImplementation(Testing.springWebflux)

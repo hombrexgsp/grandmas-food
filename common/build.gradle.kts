@@ -30,6 +30,7 @@ dependencies {
     implementation(Libraries.springboot)
     implementation(Libraries.springbootWeb)
     implementation(Libraries.springbootValidation)
+    implementation(Libraries.swagger)
 
     // Testing
     testImplementation(Testing.springWebflux)

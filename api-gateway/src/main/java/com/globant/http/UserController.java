@@ -21,20 +21,20 @@ import java.util.Optional;
 @Controller
 public class UserController {
 
-    private final UserResolver userResolver;
+    private final UserResolverImp userResolverImp;
 
-    public UserController(UserResolver userResolver) {
-        this.userResolver = userResolver;
+    public UserController(UserResolverImp userResolverImp) {
+        this.userResolverImp = userResolverImp;
     }
 
     @QueryMapping
     public List<User> allUsers() {
-        return userResolver.getAllUsers();
+        return userResolverImp.getAllUsers();
     }
 
     @QueryMapping
     public User userByDocumentNumber(@Argument String documentNumber) {
-        return userResolver.getUserByDocumentNumber(documentNumber);
+        return userResolverImp.getUserByDocumentNumber(documentNumber);
     }
 
     @MutationMapping
@@ -48,12 +48,12 @@ public class UserController {
                 input.getAddress()
         );
 
-        return userResolver.createUser(newUser);
+        return userResolverImp.createUser(newUser);
     }
 
     @MutationMapping
     public User updateUser(@Argument String documentNumber, @Argument(name = "input") UpdateUserInput updateUserInput){
-        User existingUser = userResolver.getUserByDocumentNumber(documentNumber);
+        User existingUser = userResolverImp.getUserByDocumentNumber(documentNumber);
 
         User updatedUser = new User(
                 existingUser.documentIdentity(),
@@ -71,17 +71,17 @@ public class UserController {
 
         log.info(updatedUser.toString());
 
-        return userResolver.updateUser(documentNumber, updatedUser);
+        return userResolverImp.updateUser(documentNumber, updatedUser);
     }
 
     @MutationMapping
     public boolean deleteUser(@Argument String documentNumber){
-        return userResolver.deleteUser(documentNumber);
+        return userResolverImp.deleteUser(documentNumber);
     }
 
     @QueryMapping
     public List<User> userByFirstName(@Argument("firstName") String firstName){
-        return userResolver.getUserByFirstName(firstName);
+        return userResolverImp.getUserByFirstName(firstName);
     }
 
 }

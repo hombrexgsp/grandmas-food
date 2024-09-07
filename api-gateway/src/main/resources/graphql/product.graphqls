@@ -6,16 +6,7 @@ enum Category{
 }
 
 type Combo{
-    id: ID
-    uuid: String
-    fantasyName: String
-    category: Category
-    description: String
-    price: Float
-    available: Boolean
-}
-
-input CreateComboInput{
+    uuid: ID!
     fantasyName: String!
     category: Category!
     description: String!
@@ -23,7 +14,15 @@ input CreateComboInput{
     available: Boolean!
 }
 
-input UpdateComboInput{
+input CreateComboInput {
+    fantasyName: String!
+    category: Category!
+    description: String!
+    price: Float!
+    available: Boolean!
+}
+
+input UpdateComboInput {
     fantasyName: String
     category: Category
     description: String
@@ -31,7 +30,7 @@ input UpdateComboInput{
     available: Boolean
 }
 
-extend type Mutation{
+extend type Mutation {
     createCombo(input: CreateComboInput!): Combo
     updateCombo(uuid: String!, input: UpdateComboInput!): Combo
     deleteCombo(uuid: String!): Boolean

@@ -9,14 +9,10 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 
-public class MainApp {
+public class Payment {
 
     public static void main(String[] args) {
-        SpringApplication.run(MainApp.class, args);
+        SpringApplication.run(Payment.class, args);
     }
 
-    @Bean
-    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
-        return factory -> factory.setPort(8081);
-    }
 }

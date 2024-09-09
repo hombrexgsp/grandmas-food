@@ -1,0 +1,2 @@
+server:
+  port: ${GRANDMAS_FOOD_SERVICE_API_GATEWAY_PORT}

@@ -34,12 +34,13 @@ dependencies {
     implementation(Libraries.postgresql)
     implementation(Libraries.springbootDevtools)
     implementation(Libraries.swagger)
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0-rc1")
 
-    testImplementation(Testing.springWebflux)
-    testImplementation(Testing.springbootStarter)
-    "developmentOnly"("org.springframework.boot:spring-boot-devtools")
-
-    testRuntimeOnly(Testing.junit)
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+    }
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("com.jayway.jsonpath:json-path")
 }
 
 tasks.withType<Test> {

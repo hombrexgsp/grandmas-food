@@ -1,20 +1,19 @@
 package com.globant.mapper;
 
-import com.globant.model.PersistOrder;
-import com.globant.model.entity.Order;
+import com.globant.domain.order.Order;
+import com.globant.domain.entity.OrderEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = CartComboMapper.class)
 public interface OrderMapper {
-    @Mapping(target = "id", ignore = true)
-    @Mapping(source = "orderId", target = "uuid")
-    Order fromDto (PersistOrder persistOrder);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "uuid", source = "orderId")
+    OrderEntity fromDto (Order order);
 
     @Mapping(source = "uuid", target = "orderId")
-    PersistOrder fromEntity (Order order);
-
+    Order fromEntity (OrderEntity order);
 
 }
 

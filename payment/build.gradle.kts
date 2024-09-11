@@ -25,24 +25,22 @@ repositories {
 
 dependencies {
     implementation(project(":common"))
-    implementation("org.springframework.boot:spring-boot-devtools")
 
-
-    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation(Libraries.springbootWeb)
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation(Libraries.springbootValidation)
 
-    runtimeOnly("org.postgresql:postgresql:42.5.0")
+    runtimeOnly("org.postgresql:postgresql:42.7.2")
 
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
+    compileOnly(Libraries.lombok)
+    annotationProcessor(Libraries.lombok)
     annotationProcessor(Libraries.mapStructProcessor)
     implementation(Libraries.mapStruct)
 
     runtimeOnly("com.h2database:h2")
 
-
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testRuntimeOnly(Testing.junit)
 }
 
 tasks.withType<Test> {

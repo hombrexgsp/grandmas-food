@@ -26,16 +26,28 @@ repositories {
 dependencies {
     implementation(project(":common"))
 
+    implementation(project(":common"))
+    implementation(Libraries.springbootValidation)
+    implementation(Libraries.springbootWeb)
     compileOnly(Libraries.lombok)
     annotationProcessor(Libraries.lombok)
-
     implementation(Libraries.springboot)
+    implementation(Libraries.dataJpa)
+    implementation(Libraries.postgresql)
+    implementation(Libraries.springbootDevtools)
     implementation(Libraries.swagger)
+    implementation(Libraries.mapStruct)
+    implementation(Libraries.mapStructProcessor)
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0-rc1")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+    }
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("com.jayway.jsonpath:json-path")
 
     testImplementation(Testing.springWebflux)
-    testImplementation(Testing.springbootStarter)
 
-    testRuntimeOnly(Testing.junit)
 }
 
 tasks.withType<Test> {

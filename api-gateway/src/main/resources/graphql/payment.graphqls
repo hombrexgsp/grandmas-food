@@ -4,7 +4,7 @@ type ComboCartSimple {
 }
 
 type Delivery {
-    deliveryTime: String
+    deliveredTime: String
 }
 
 type CreatedOrder {

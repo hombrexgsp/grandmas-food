@@ -4,6 +4,7 @@ import com.globant.domain.order.CheckoutOrder;
 import com.globant.resolvers.PaymentResolver;
 import domain.payment.CreateOrder;
 import domain.payment.CreatedOrder;
+import jakarta.validation.Valid;
 import org.hibernate.validator.constraints.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,7 +33,7 @@ public class PaymentController {
     }
 
     @MutationMapping
-    public CreatedOrder createOrder(@Argument(name = "input") CheckoutOrder checkoutOrder) {
+    public CreatedOrder createOrder(@Argument(name = "input") @Valid CheckoutOrder checkoutOrder) {
         return paymentResolver.checkout(checkoutOrder);
     }
 
@@ -46,5 +47,4 @@ public class PaymentController {
                 LocalDateTime.from(DateTimeFormatter.ISO_DATE_TIME.parse(deliveryTime))
         );
     }
-
 }

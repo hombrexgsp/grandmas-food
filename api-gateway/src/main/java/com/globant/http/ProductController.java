@@ -4,6 +4,9 @@ import com.globant.resolvers.ProductResolver;
 import domain.combo.Combo;
 import domain.combo.CreateCombo;
 import domain.combo.UpdateCombo;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -27,28 +30,32 @@ public class ProductController {
     }
 
     @QueryMapping
-    public Combo comboByUuid(@Argument UUID uuid) {
-        return productResolver.searchByUuid(uuid);
+    public Combo comboByUuid(@Argument @NotEmpty @org.hibernate.validator.constraints.UUID String uuid) {
+        return productResolver.searchByUuid(UUID.fromString(uuid));
     }
 
     @QueryMapping
-    public List<Combo> combosByName(@Argument String name) {
+    public List<Combo> combosByName(@Argument @NotEmpty String name) {
         return productResolver.searchByName(name);
     }
 
     @MutationMapping
-    public Combo createCombo(@Argument(name = "input") CreateCombo combo) {
+    public Combo createCombo(@Argument(name = "input") @Valid CreateCombo combo) {
         return productResolver.addCombo(combo);
     }
 
     @MutationMapping
-    public void updateCombo(@Argument UUID uuid, @Argument(name = "input") UpdateCombo combo) {
-        productResolver.updateCombo(uuid, combo);
+    public void updateCombo(
+            @Argument @NotEmpty
+            @org.hibernate.validator.constraints.UUID String uuid,
+            @Argument(name = "input") @Valid UpdateCombo combo
+    ) {
+        productResolver.updateCombo(UUID.fromString(uuid), combo);
     }
 
     @MutationMapping
-    public void deleteCombo(@Argument UUID uuid) {
-        productResolver.deleteCombo(uuid);
+    public void deleteCombo(@Argument @org.hibernate.validator.constraints.UUID String uuid) {
+        productResolver.deleteCombo(UUID.fromString(uuid));
     }
 
 }

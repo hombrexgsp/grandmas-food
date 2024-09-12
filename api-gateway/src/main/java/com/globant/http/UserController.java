@@ -8,6 +8,8 @@ import com.globant.domain.user.CreateUserInput;
 
 import domain.user.DocumentIdentity;
 import com.globant.domain.user.UpdateUserInput;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -33,12 +35,12 @@ public class UserController {
     }
 
     @QueryMapping
-    public User userByDocumentNumber(@Argument String documentNumber) {
+    public User userByDocumentNumber(@Argument @NotEmpty String documentNumber) {
         return userResolver.getUserByDocumentNumber(documentNumber);
     }
 
     @MutationMapping
-    public User createUser(@Argument CreateUserInput input){
+    public User createUser(@Argument @Valid CreateUserInput input){
         User newUser = new User(
                 new DocumentIdentity(input.getDocumentIdentity().getDocumentType(), input.getDocumentIdentity().getDocumentNumber()),
                 input.getFirstName(),
@@ -52,7 +54,8 @@ public class UserController {
     }
 
     @MutationMapping
-    public User updateUser(@Argument String documentNumber, @Argument(name = "input") UpdateUserInput updateUserInput){
+    public User updateUser(@Argument @NotEmpty String documentNumber,
+                           @Argument(name = "input") @Valid UpdateUserInput updateUserInput){
         User existingUser = userResolver.getUserByDocumentNumber(documentNumber);
 
         User updatedUser = new User(
@@ -75,12 +78,12 @@ public class UserController {
     }
 
     @MutationMapping
-    public boolean deleteUser(@Argument String documentNumber){
+    public boolean deleteUser(@Argument @NotEmpty String documentNumber){
         return userResolver.deleteUser(documentNumber);
     }
 
     @QueryMapping
-    public List<User> userByFirstName(@Argument("firstName") String firstName){
+    public List<User> userByFirstName(@Argument("firstName") @NotEmpty String firstName){
         return userResolver.getUserByFirstName(firstName);
     }
 

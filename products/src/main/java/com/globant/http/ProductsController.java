@@ -4,6 +4,8 @@ import domain.combo.Combo;
 import domain.combo.CreateCombo;
 import domain.combo.UpdateCombo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,12 +32,14 @@ public class ProductsController {
     }
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<Combo> getByUuid(@PathVariable UUID uuid) {
-        return ResponseEntity.ok(comboService.searchByUuid(uuid));
+    public ResponseEntity<Combo> getByUuid(
+            @PathVariable @org.hibernate.validator.constraints.UUID @NotNull String uuid
+    ) {
+        return ResponseEntity.ok(comboService.searchByUuid(UUID.fromString(uuid)));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Combo>> getByName(@RequestParam("q") String name) {
+    public ResponseEntity<List<Combo>> getByName(@RequestParam("q") @NotEmpty String name) {
         return ResponseEntity.ok(comboService.searchByName(name));
     }
 
@@ -51,8 +55,10 @@ public class ProductsController {
     }
 
     @DeleteMapping("/{uuid}")
-    public ResponseEntity<Void> deleteCombo(@PathVariable UUID uuid) {
-        comboService.deleteCombo(uuid);
+    public ResponseEntity<Void> deleteCombo(
+            @PathVariable @org.hibernate.validator.constraints.UUID String uuid
+    ) {
+        comboService.deleteCombo(UUID.fromString(uuid));
         return ResponseEntity.noContent().build();
     }
 }

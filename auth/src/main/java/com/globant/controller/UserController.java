@@ -2,6 +2,8 @@ package com.globant.controller;
 
 import com.globant.dto.UserDto;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.globant.service.UserService;
@@ -30,25 +32,27 @@ public class UserController {
     }
 
     @GetMapping("/document/{documentNumber}")
-    public ResponseEntity<UserDto> getUserByDocumentNumber(@PathVariable Long documentNumber) {
+    public ResponseEntity<UserDto> getUserByDocumentNumber(@PathVariable @Positive Long documentNumber) {
         UserDto userDto = userService.getUserByDocumentNumber(documentNumber);
         return ResponseEntity.ok(userDto);
     }
 
     @PutMapping("/{documentNumber}")
-    public ResponseEntity<Void> updateUser(@PathVariable Long documentNumber, @Valid @RequestBody UserDto userDto) {
+    public ResponseEntity<Void> updateUser(
+            @PathVariable @Positive Long documentNumber,
+            @Valid @RequestBody UserDto userDto) {
         UserDto toUpdateUser = userService.updateUser(documentNumber, userDto);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{documentNumber}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long documentNumber) {
+    public ResponseEntity<Void> deleteUser(@PathVariable @Positive Long documentNumber) {
         userService.deleteUser(documentNumber);
         return ResponseEntity.noContent().build();
     }
 
     @RequestMapping("/name/{firstName}")
-    public ResponseEntity<List<UserDto>> getUserByFirstName(@PathVariable String firstName) {
+    public ResponseEntity<List<UserDto>> getUserByFirstName(@PathVariable @NotEmpty String firstName) {
         List<UserDto> users = userService.findUserByNameContaining(firstName);
         if (users.isEmpty()) {
             return ResponseEntity.notFound().build();

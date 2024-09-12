@@ -10,6 +10,6 @@ import java.util.UUID;
 
 public interface PaymentResolver {
     List<CreatedOrder> getAllOrders();
-    CreatedOrder createOrder(CheckoutOrder checkoutOrder);
+    CreatedOrder checkout(CheckoutOrder checkoutOrder);
     CreatedOrder deliverOrder(UUID orderId, LocalDateTime deliveryTime);
 }

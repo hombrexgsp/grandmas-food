@@ -5,8 +5,10 @@ import com.globant.resolvers.PaymentResolver;
 import domain.cart.CartTotal;
 import domain.payment.CreateOrder;
 import domain.payment.CreatedOrder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Component
 public class PaymentResolverImpl implements PaymentResolver {
 
@@ -24,6 +27,7 @@ public class PaymentResolverImpl implements PaymentResolver {
     public PaymentResolverImpl(RestClient.Builder builder) {
         this.paymentClient = builder
                 .baseUrl("http://localhost:8084/orders")
+                .requestFactory(new HttpComponentsClientHttpRequestFactory())
                 .build();
 
         this.cartClient = builder
@@ -39,7 +43,7 @@ public class PaymentResolverImpl implements PaymentResolver {
     }
 
     @Override
-    public CreatedOrder createOrder(CheckoutOrder checkoutOrder) {
+    public CreatedOrder checkout(CheckoutOrder checkoutOrder) {
         final var cart = cartClient.get()
                 .uri("/{document}", checkoutOrder.documentNumber())
                 .retrieve()
@@ -58,7 +62,7 @@ public class PaymentResolverImpl implements PaymentResolver {
     @Override
     public CreatedOrder deliverOrder(UUID orderId, LocalDateTime deliveryTime) {
         return paymentClient.patch()
-                .uri("/{uuid}/delivered/{timestamp}",orderId, deliveryTime)
+                .uri("/{uuid}/delivered/{timestamp}", orderId, deliveryTime)
                 .retrieve()
                 .body(CreatedOrder.class);
     }

@@ -34,6 +34,8 @@ dependencies {
     implementation(Libraries.springbootValidation)
     implementation(Libraries.vavr)
     implementation(Libraries.swagger)
+    implementation(Libraries.springbootWeb)
+
 
     testImplementation(Testing.springWebflux)
     testImplementation(Testing.springbootStarter)

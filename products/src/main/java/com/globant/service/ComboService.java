@@ -4,10 +4,10 @@ import com.globant.instances.ComboMappable;
 import domain.combo.Combo;
 import domain.combo.CreateCombo;
 import domain.combo.UpdateCombo;
-import domain.combo.error.ComboDuplicatedName;
-import domain.combo.error.ComboNotFound;
-import domain.combo.error.NoComboChanges;
-import io.vavr.control.Option;
+import domain.combo.error.ComboException.ComboDuplicatedName;
+import domain.combo.error.ComboException.ComboNotFound;
+import domain.combo.error.ComboException.NoComboChanges;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.globant.repository.ComboRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +21,7 @@ public class ComboService {
     private final ComboRepository repository;
     private final ComboMappable mapper;
 
+    @Autowired
     public ComboService(ComboRepository repository, ComboMappable mapper) {
         this.repository = repository;
         this.mapper = mapper;

@@ -1,0 +1,24 @@
+type CartCombo {
+    combo: Combo!
+    quantity: Int!
+}
+
+type CartTotal {
+    products: [CartCombo]!
+    total: Float!
+}
+
+input AddCartComboInput {
+    productId: ID!
+    quantity: Int!
+}
+
+extend type Query {
+    getCart(documentNumber: Int!): CartTotal!
+}
+
+extend type Mutation {
+    addToCart(documentNumber: Int!, cartCombo: AddCartComboInput!): CartTotal
+    removeFromCart(documentNumber: Int!, productId: ID!): CartTotal
+    clearCart(documentNumber: Int!): Boolean
+}

@@ -1,6 +1,7 @@
 object Libraries {
     const val lombok = "org.projectlombok:lombok"
     const val springboot = "org.springframework.boot:spring-boot-starter"
+    const val springbootDevtools = "org.springframework.boot:spring-boot-devtools"
     const val spingbootDockerCompose = "org.springframework.boot:spring-boot-docker-compose"
     const val springbootGraphQl = "org.springframework.boot:spring-boot-starter-graphql"
     const val springbootMongo = "org.springframework.boot:spring-boot-starter-data-mongodb"
@@ -14,6 +15,10 @@ object Libraries {
     const val vavrMatchProcessor = "io.vavr:vavr-match-processor:0.10.4"
     const val r2dbc = "io.r2dbc:r2dbc-postgresql"
     const val jedis = "redis.clients:jedis"
+    const val dataJpa = "org.springframework.boot:spring-boot-starter-data-jpa"
+    const val postgresql = "org.postgresql:postgresql"
+    const val swagger = "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0"
+    const val httpcomponentsClient = "org.apache.httpcomponents.client5:httpclient5:5.3.1"
 }
 
 object Testing {

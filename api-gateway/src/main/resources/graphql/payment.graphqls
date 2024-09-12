@@ -1,0 +1,48 @@
+type ComboCartSimple {
+    comboId: ID!
+    quantity: Int!
+}
+
+type Delivery {
+    deliveredTime: String
+}
+
+type CreatedOrder {
+    uuid: ID!
+    creationDateTime: String!
+    userId: ID!
+    products: [ComboCartSimple]!
+    extraInformation: String!
+    subtotal: Float!
+    tax: Float!
+    total: Float!
+    delivery: Delivery!
+}
+
+input ComboInput {
+    uuid: ID!
+    fantasyName: String!
+    category: Category!
+    description: String!
+    price: Float!
+    available: Boolean!
+}
+
+input CartTotalInput {
+    products: [ComboInput]!
+    total: Float!
+}
+
+input CreateOrderInput {
+    documentNumber: ID!
+    extraInformation: String!
+}
+
+extend type Query {
+    allOrders: [CreatedOrder]!
+}
+
+extend type Mutation {
+    createOrder(input: CreateOrderInput!): CreatedOrder!
+    deliverOrder(orderId: ID!, deliveryTime: String!): CreatedOrder!
+}

@@ -6,8 +6,6 @@ import jakarta.validation.constraints.Positive;
 import java.util.UUID;
 
 public record AddCartCombo(
-        @NotNull
-        @org.hibernate.validator.constraints.UUID
         UUID productId,
 
         @NotNull @Positive

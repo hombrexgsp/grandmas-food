@@ -1,4 +1,4 @@
-package com.globant.domain.cart;
+package domain.payment.cart;
 
 import java.util.UUID;
 

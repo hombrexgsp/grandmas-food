@@ -14,7 +14,7 @@ public class UserResolverImpl implements UserResolver {
     private final RestClient userClient;
 
     public UserResolverImpl(RestClient.Builder restClientBuilder) {
-        this.userClient = restClientBuilder.baseUrl("http://localhost:8083/users").build();
+        this.userClient = restClientBuilder.baseUrl("http://localhost:8081/users").build();
     }
 
     public User createUser(User newUser){

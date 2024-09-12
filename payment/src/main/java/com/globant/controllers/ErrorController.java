@@ -1,15 +1,10 @@
 package com.globant.controllers;
 
 import com.globant.domain.error.OrderNotFound;
-import domain.combo.error.ComboDuplicatedName;
-import domain.combo.error.ComboNotFound;
-import domain.combo.error.NoComboChanges;
 import domain.http.error.ErrorCode;
 import domain.http.error.ErrorResponse;
-import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;

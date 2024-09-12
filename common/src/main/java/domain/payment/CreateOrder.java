@@ -1,4 +1,4 @@
-package com.globant.domain.order;
+package domain.payment;
 import domain.cart.CartTotal;
 import jakarta.validation.constraints.NotNull;
 

@@ -1,6 +1,6 @@
 package com.globant.mapper;
 
-import com.globant.domain.order.Order;
+import domain.payment.Order;
 import com.globant.domain.entity.OrderEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

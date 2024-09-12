@@ -1,4 +1,4 @@
-package com.globant.domain.delivery;
+package domain.payment.delivery;
 
 import java.time.LocalDateTime;
 

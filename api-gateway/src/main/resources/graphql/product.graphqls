@@ -5,7 +5,7 @@ enum Category{
     DESSERT
 }
 
-type Combo{
+type Combo {
     uuid: ID!
     fantasyName: String!
     category: Category!

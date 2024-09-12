@@ -15,7 +15,7 @@ public class CartResolverImpl implements CartResolver {
 
     public CartResolverImpl(RestClient.Builder builder) {
         this.cartClient = builder
-                .baseUrl("http://localhost:8082/cart")
+                .baseUrl("http://localhost:8083/cart")
                 .build();
     }
 

@@ -1,7 +1,7 @@
-package com.globant.domain.order;
+package domain.payment;
 
-import com.globant.domain.cart.CartComboSimple;
-import com.globant.domain.delivery.Delivery;
+import domain.payment.cart.CartComboSimple;
+import domain.payment.delivery.Delivery;
 
 import java.time.LocalDateTime;
 import java.util.List;

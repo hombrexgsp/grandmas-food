@@ -20,7 +20,7 @@ public class OrderEntity {
     private int id;
 
     @Column(name = "uuid")
-    private UUID uuid;
+    private UUID uuid = UUID.randomUUID();
 
     @Column(name = "creation_time")
     private LocalDateTime creationTime;
@@ -28,7 +28,7 @@ public class OrderEntity {
     @Column(name = "user_id", nullable = false)
     private Long documentNumber;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<CartComboEntity> combos;
 
     @Column(name = "extra_information")

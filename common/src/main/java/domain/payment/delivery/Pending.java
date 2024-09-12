@@ -1,4 +1,4 @@
-package com.globant.domain.delivery;
+package domain.payment.delivery;
 
 public record Pending() implements Delivery {
     @Override

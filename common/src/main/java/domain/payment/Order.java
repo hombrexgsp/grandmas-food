@@ -1,7 +1,7 @@
-package com.globant.domain.order;
+package domain.payment;
 
 
-import com.globant.domain.cart.CartComboSimple;
+import domain.payment.cart.CartComboSimple;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;

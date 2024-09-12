@@ -33,7 +33,7 @@ public class PaymentController {
 
     @MutationMapping
     public CreatedOrder createOrder(@Argument(name = "input") CheckoutOrder checkoutOrder) {
-        return paymentResolver.createOrder(checkoutOrder);
+        return paymentResolver.checkout(checkoutOrder);
     }
 
     @MutationMapping

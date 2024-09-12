@@ -44,7 +44,6 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<CreatedOrder>createOrder(@RequestBody @Valid CreateOrder createOrder){
-        log.info(STR."Inminent order: \{createOrder.toString()}");
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createOrder(createOrder));
     }
 

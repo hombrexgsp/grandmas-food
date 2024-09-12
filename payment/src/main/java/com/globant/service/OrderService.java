@@ -78,8 +78,11 @@ public class OrderService {
                 createOrder.cart().total()
         );
 
+        final var orderEntity = orderMapper.fromDto(order);
+        orderEntity.getCombos().forEach(combo -> combo.setOrder(orderEntity));
+
         return CreatedOrder.fromOrder(
-                orderMapper.fromEntity(orderRepository.save(orderMapper.fromDto(order))),
+                orderMapper.fromEntity(orderRepository.save(orderEntity)),
                 checkDelivery(orderId)
         );
     }

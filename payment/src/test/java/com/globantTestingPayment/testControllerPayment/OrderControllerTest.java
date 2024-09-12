@@ -86,7 +86,7 @@ public class OrderControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.uuid").value(uuid.toString()))
-                .andExpect(jsonPath("$.delivery.deliveredDate").exists());
+                .andExpect(jsonPath("$.delivery.deliveredTime").exists());
     }
 
 

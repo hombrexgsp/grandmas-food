@@ -18,6 +18,7 @@ object Libraries {
     const val dataJpa = "org.springframework.boot:spring-boot-starter-data-jpa"
     const val postgresql = "org.postgresql:postgresql"
     const val swagger = "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0"
+    const val httpcomponentsClient = "org.apache.httpcomponents.client5:httpclient5:5.3.1"
 }
 
 object Testing {

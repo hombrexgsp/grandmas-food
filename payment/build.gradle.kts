@@ -40,12 +40,20 @@ dependencies {
     implementation(Libraries.springboot)
     implementation(Libraries.swagger)
 
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+    }
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("com.jayway.jsonpath:json-path")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly(Testing.junit)
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    jvmArgs("--enable-preview")
 }
 
 tasks.withType<JavaCompile> {

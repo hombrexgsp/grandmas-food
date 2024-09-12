@@ -1,6 +1,5 @@
 package com.globant.domain.cart;
 
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 
 import java.util.UUID;

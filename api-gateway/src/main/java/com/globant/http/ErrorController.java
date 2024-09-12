@@ -17,10 +17,7 @@ public class ErrorController {
 
     @GraphQlExceptionHandler
     public GraphQLError handleResolver(HttpClientErrorException e) {
-
         var errorBody = e.getResponseBodyAs(ErrorBody.class);
-        log.error(e.getResponseBodyAsString());
-
         return GraphQLError
                 .newError()
                 .errorType(ErrorClassification.errorClassification(errorBody.code()))
@@ -30,7 +27,7 @@ public class ErrorController {
     }
 
     @GraphQlExceptionHandler
-    public GraphQLError handle (Exception e) {
+    public GraphQLError handle (Throwable e) {
         log.error(e.getMessage());
         return GraphQLError
                 .newError()

@@ -26,34 +26,38 @@ repositories {
 dependencies {
     implementation(project(":common"))
 
-    implementation(project(":common"))
-    implementation(Libraries.springbootValidation)
     implementation(Libraries.springbootWeb)
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation(Libraries.springbootValidation)
+
+    runtimeOnly("org.postgresql:postgresql:42.7.2")
+
     compileOnly(Libraries.lombok)
     annotationProcessor(Libraries.lombok)
-    implementation(Libraries.springboot)
-    implementation(Libraries.dataJpa)
-    implementation(Libraries.postgresql)
-    implementation(Libraries.springbootDevtools)
-    implementation(Libraries.swagger)
+    annotationProcessor(Libraries.mapStructProcessor)
     implementation(Libraries.mapStruct)
-    implementation(Libraries.mapStructProcessor)
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0-rc1")
+
+    implementation(Libraries.springboot)
+    implementation(Libraries.swagger)
+
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
     testImplementation("org.mockito:mockito-core")
     testImplementation("com.jayway.jsonpath:json-path")
-
-    testImplementation(Testing.springWebflux)
-
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    jvmArgs("--enable-preview")
 }
 
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("--enable-preview")
+}
+
+springBoot {
+    mainClass.set("com.globant.apigateway.ApiGatewayApplication")
 }

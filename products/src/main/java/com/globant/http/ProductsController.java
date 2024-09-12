@@ -4,6 +4,7 @@ import domain.combo.Combo;
 import domain.combo.CreateCombo;
 import domain.combo.UpdateCombo;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.globant.service.ComboService;
@@ -18,23 +19,24 @@ public class ProductsController {
 
     private final ComboService comboService;
 
+    @Autowired
     public ProductsController(ComboService comboService) {
         this.comboService = comboService;
     }
 
     @GetMapping
-    public List<Combo> getAllCombos() {
-        return comboService.getAll();
+    public ResponseEntity<List<Combo>> getAllCombos() {
+        return ResponseEntity.ok(comboService.getAll());
     }
 
     @GetMapping("/{uuid}")
-    public Combo getByUuid(@PathVariable UUID uuid) {
-        return comboService.searchByUuid(uuid);
+    public ResponseEntity<Combo> getByUuid(@PathVariable UUID uuid) {
+        return ResponseEntity.ok(comboService.searchByUuid(uuid));
     }
 
     @GetMapping("/search")
-    public List<Combo> getByName(@RequestParam("q") String name) {
-        return comboService.searchByName(name);
+    public ResponseEntity<List<Combo>> getByName(@RequestParam("q") String name) {
+        return ResponseEntity.ok(comboService.searchByName(name));
     }
 
     @PostMapping

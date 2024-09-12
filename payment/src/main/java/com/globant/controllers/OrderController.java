@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import com.globant.domain.order.CreatedOrder;
-import com.globant.domain.order.CreateOrder;
-import com.globant.domain.order.Order;
+import domain.payment.CreatedOrder;
+import domain.payment.CreateOrder;
+import domain.payment.Order;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +23,7 @@ import com.globant.service.OrderService;
 @Slf4j
 @RequestMapping("/orders")
 public class OrderController {
+
     private final OrderService orderService;
 
     @Autowired
@@ -43,7 +44,7 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<CreatedOrder>createOrder(@RequestBody @Valid CreateOrder createOrder){
-        log.info(createOrder.toString());
+        log.info(STR."Inminent order: \{createOrder.toString()}");
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createOrder(createOrder));
     }
 

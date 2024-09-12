@@ -1,13 +1,15 @@
 package com.globantTestingPayment.testControllerPayment;
 
 import com.globant.Payment;
-import com.globant.domain.delivery.Delivered;
-import com.globant.domain.delivery.Pending;
-import com.globant.domain.order.CreateOrder;
-import com.globant.domain.order.CreatedOrder;
-import com.globant.domain.order.Order;
+import domain.payment.CreatedOrder;
+import domain.payment.CreateOrder;
+import domain.payment.Order;
+
+
 import com.globant.service.OrderService;
 import domain.cart.CartTotal;
+import domain.payment.delivery.Delivered;
+import domain.payment.delivery.Pending;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

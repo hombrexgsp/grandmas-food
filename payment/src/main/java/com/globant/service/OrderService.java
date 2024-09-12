@@ -6,15 +6,15 @@ import java.util.UUID;
 
 import com.globant.domain.delivery.CreateDelivery;
 import com.globant.domain.error.OrderNotFound;
-import com.globant.domain.order.CreatedOrder;
-import com.globant.domain.cart.CartComboSimple;
-import com.globant.domain.delivery.Delivered;
-import com.globant.domain.delivery.Delivery;
-import com.globant.domain.delivery.Pending;
+import domain.payment.CreatedOrder;
+import domain.payment.cart.CartComboSimple;
+import domain.payment.delivery.Delivered;
+import domain.payment.delivery.Delivery;
+import domain.payment.delivery.Pending;
 import com.globant.mapper.DeliveryMapper;
 import com.globant.mapper.OrderMapper;
-import com.globant.domain.order.CreateOrder;
-import com.globant.domain.order.Order;
+import domain.payment.CreateOrder;
+import domain.payment.Order;
 import com.globant.repository.DeliveryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,9 +61,10 @@ public class OrderService {
 
 
     @Transactional
-    public CreatedOrder createOrder(CreateOrder createOrder){
+    public CreatedOrder createOrder(CreateOrder createOrder) {
         final var orderId = UUID.randomUUID();
-        final var order = new Order(
+
+        final var orderEntity = orderMapper.fromDto(new Order(
                 orderId,
                 LocalDateTime.now(),
                 createOrder.documentNumber(),
@@ -76,12 +77,13 @@ public class OrderService {
                         .toList(),
                 createOrder.extraInformation(),
                 createOrder.cart().total()
-        );
+        ));
 
-        return CreatedOrder.fromOrder(
-                orderMapper.fromEntity(orderRepository.save(orderMapper.fromDto(order))),
-                checkDelivery(orderId)
-        );
+        orderEntity.getCombos().forEach(combo -> combo.setOrder(orderEntity));
+
+        var savedOrder = orderRepository.save(orderEntity);
+
+        return CreatedOrder.fromOrder(orderMapper.fromEntity(savedOrder), checkDelivery(orderId));
     }
 
 

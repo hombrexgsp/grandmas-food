@@ -1,7 +1,7 @@
 package com.globant.mapper;
 
-import com.globant.domain.cart.CartComboSimple;
 import com.globant.domain.entity.CartComboEntity;
+import domain.payment.cart.CartComboSimple;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

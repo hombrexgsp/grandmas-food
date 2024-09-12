@@ -19,6 +19,11 @@ public enum ErrorCode {
     DUPLICATE_PRODUCT_NAME("E2002"),
     NO_PRODUCT_CHANGES("E2003"),
 
+    // Shopping cart
+
+    // Payment
+    ORDER_NOT_FOUND("E4001"),
+
     // Validation
     VALIDATION_ERROR("E9001"),
 

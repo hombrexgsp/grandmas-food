@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/v1/cart")
 public class CartController {
 
     private final ShoppingCart shoppingCart;
@@ -23,11 +23,12 @@ public class CartController {
     }
 
     @PostMapping("/{document}")
-    public void addToCart (
+    public ResponseEntity<Void> addToCart (
             @PathVariable @Positive @Digits(integer = 20, fraction = 0) Long document,
             @Valid @RequestBody AddCartCombo combo
     ) {
         shoppingCart.add(document, combo.productId(), combo.quantity());
+        return ResponseEntity.status(200).build();
     }
 
     @GetMapping("/{document}")

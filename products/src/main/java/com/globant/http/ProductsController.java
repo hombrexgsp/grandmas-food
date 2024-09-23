@@ -16,7 +16,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/v1/products")
 public class ProductsController {
 
     private final ComboService comboService;

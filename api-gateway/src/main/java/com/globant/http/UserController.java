@@ -42,7 +42,7 @@ public class UserController {
     @MutationMapping
     public User createUser(@Argument @Valid CreateUserInput input){
         User newUser = new User(
-                new DocumentIdentity(input.getDocumentIdentity().getDocumentType(), input.getDocumentIdentity().getDocumentNumber()),
+                new DocumentIdentity(input.getDocumentIdentity().getDocumentNumber(), input.getDocumentIdentity().getDocumentType()),
                 input.getFirstName(),
                 input.getLastName(),
                 input.getEmail(),

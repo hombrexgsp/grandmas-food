@@ -2,8 +2,8 @@ package com.globantTesting.testController;
 
 import com.globant.Auth;
 import com.globant.dto.UserDto;
-import com.globant.model.identity.DocumentIdentity;
-import com.globant.model.identity.DocumentType;
+import domain.user.DocumentIdentity;
+import domain.user.DocumentType;
 import com.globant.service.UserService;
 import com.globantTesting.util.JsonUtil;
 import org.junit.jupiter.api.Test;

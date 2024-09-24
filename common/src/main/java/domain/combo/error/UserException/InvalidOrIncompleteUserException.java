@@ -2,9 +2,9 @@ package domain.combo.error.UserException;
 
 import domain.http.error.ErrorCode;
 
-public class InvalidOrIncompleteUserException extends RuntimeException {
-    public InvalidOrIncompleteUserException(String message) {
-        super(message);
+public final class InvalidOrIncompleteUserException extends RuntimeException {
+    public InvalidOrIncompleteUserException() {
+        super("Values of the customer are invalid or incomplete");
     }
 
     public ErrorCode getErrorCode() {

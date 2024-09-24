@@ -1,8 +1,8 @@
 package com.globant.model;
 
+import domain.user.DocumentIdentity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import com.globant.model.identity.DocumentIdentity;
 import lombok.Getter;
 import lombok.Setter;
 

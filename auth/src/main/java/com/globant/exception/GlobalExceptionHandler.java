@@ -4,6 +4,7 @@ package com.globant.exception;
 import domain.combo.error.UserException.*;
 import domain.http.error.ErrorCode;
 import domain.http.error.ErrorResponse;
+import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

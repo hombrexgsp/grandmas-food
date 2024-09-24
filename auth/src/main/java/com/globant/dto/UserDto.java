@@ -1,6 +1,7 @@
 package com.globant.dto;
 
-import com.globant.model.identity.DocumentIdentity;
+
+import domain.user.DocumentIdentity;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

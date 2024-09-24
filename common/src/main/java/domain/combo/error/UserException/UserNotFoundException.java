@@ -3,9 +3,14 @@ package domain.combo.error.UserException;
 
 import domain.http.error.ErrorCode;
 
-public class UserNotFoundException extends RuntimeException {
-    public UserNotFoundException(String message){
-        super(message);
+public final class UserNotFoundException extends RuntimeException {
+
+    public UserNotFoundException(Long documentNumber){
+        super(STR."User with document number \{documentNumber} not found");
+    }
+
+    public UserNotFoundException(String name){
+        super(STR."No single user with name \{name} found");
     }
 
     public ErrorCode getErrorCode(){

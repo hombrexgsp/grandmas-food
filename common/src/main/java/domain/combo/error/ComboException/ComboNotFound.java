@@ -1,7 +1,9 @@
 package domain.combo.error.ComboException;
 
-public class ComboNotFound extends RuntimeException {
-    public ComboNotFound(String message) {
-        super(message);
+import java.util.UUID;
+
+public final class ComboNotFound extends RuntimeException {
+    public ComboNotFound(UUID comboId) {
+        super(STR."Combo with uuid \{comboId} not found");
     }
 }

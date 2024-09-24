@@ -1,7 +1,7 @@
 package domain.combo.error.ComboException;
 
-public class NoComboChanges extends RuntimeException {
-    public NoComboChanges(String message) {
-        super(message);
+public final class NoComboChanges extends RuntimeException {
+    public NoComboChanges() {
+        super("No changes detected on imminent update");
     }
 }

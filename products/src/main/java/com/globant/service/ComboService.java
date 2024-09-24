@@ -42,7 +42,7 @@ public class ComboService {
                 .findByUuid(uuid)
                 .map(mapper::to)
                 .orElseThrow(
-                        () -> new ComboNotFound(STR."Combo with uuid \{uuid} not found")
+                        () -> new ComboNotFound(uuid)
                 );
     }
 
@@ -58,9 +58,7 @@ public class ComboService {
     @Transactional
     public Combo addCombo(CreateCombo createCombo) {
         if (repository.findByFantasyName(createCombo.fantasyName()).isPresent()) {
-            throw new ComboDuplicatedName(
-                    STR."Combo with name \{createCombo.fantasyName()} already exists"
-            );
+            throw new ComboDuplicatedName(createCombo.fantasyName());
         }
         else return mapper.to(repository.save(mapper.from(createCombo.toCombo(UUID.randomUUID()))));
     }
@@ -71,19 +69,15 @@ public class ComboService {
                 .ifPresentOrElse(
                 comboEntity -> {
                     if (mapper.to(comboEntity).equals(updateCombo.toCombo(uuid))) {
-                        throw new NoComboChanges(
-                                STR."No changes detected on inminent update with combo \n \{updateCombo}"
-                        );
+                        throw new NoComboChanges();
                     }
                     else if (repository.findByFantasyName(updateCombo.fantasyName()).isPresent()) {
-                        throw new ComboDuplicatedName(
-                                STR."Combo with name \{updateCombo.fantasyName()} already exists"
-                        );
+                        throw new ComboDuplicatedName(updateCombo.fantasyName());
                     }
                     else repository.updateByUuid(uuid, mapper.from(updateCombo.toCombo(uuid)));
                 },
                 () -> {
-                    throw new ComboNotFound(STR."Combo with uuid \{uuid} not found");
+                    throw new ComboNotFound(uuid);
                 }
         );
     }
@@ -93,7 +87,7 @@ public class ComboService {
         repository.findByUuid(uuid).ifPresentOrElse(
                 repository::delete,
                 () -> {
-                    throw new ComboNotFound(STR."Combo with uuid \{uuid} not found");
+                    throw new ComboNotFound(uuid);
                 }
         );
     }

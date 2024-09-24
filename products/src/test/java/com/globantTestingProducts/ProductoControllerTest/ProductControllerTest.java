@@ -104,7 +104,7 @@ public class ProductControllerTest {
     public void getComboByUuid_NotFound() throws Exception {
         UUID uuid = UUID.randomUUID();
 
-        Mockito.when(comboService.searchByUuid(uuid)).thenThrow(new ComboNotFound("Combo not found"));
+        Mockito.when(comboService.searchByUuid(uuid)).thenThrow(new ComboNotFound(uuid));
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/products/{uuid}", uuid)

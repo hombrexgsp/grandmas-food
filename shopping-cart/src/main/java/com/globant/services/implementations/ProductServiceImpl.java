@@ -24,6 +24,6 @@ public class ProductServiceImpl implements ProductService {
     public Combo getCombo(UUID uuid) {
         return repository.findByUuid(uuid)
                 .map(mapper::to)
-                .orElseThrow(() -> new ComboNotFound(STR."Combo with uuid \{uuid} not found"));
+                .orElseThrow(() -> new ComboNotFound(uuid));
     }
 }

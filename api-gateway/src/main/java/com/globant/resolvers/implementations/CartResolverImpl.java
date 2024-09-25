@@ -5,56 +5,55 @@ import com.globant.resolvers.CartResolver;
 import domain.cart.CartTotal;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
 @Component
 public class CartResolverImpl implements CartResolver {
 
-    private final RestClient cartClient;
+    private final WebClient cartClient;
 
-    public CartResolverImpl(RestClient.Builder builder) {
+    public CartResolverImpl(WebClient.Builder builder) {
         this.cartClient = builder
                 .baseUrl("http://localhost:8083/cart")
                 .build();
     }
 
     @Override
-    public CartTotal getCart(Integer userId) {
+    public Mono<CartTotal> getCart(Integer userId) {
         return cartClient.get()
                 .uri("/{userId}", userId)
                 .retrieve()
-                .body(CartTotal.class);
+                .bodyToMono(CartTotal.class);
     }
 
     @Override
-    public CartTotal addToCart(Integer userId, AddCartComboInput cartCombo) {
-        cartClient.post()
+    public Mono<CartTotal> addToCart(Integer userId, AddCartComboInput cartCombo) {
+        return cartClient.post()
                 .uri("/{userId}", userId)
-                .body(cartCombo)
+                .body(cartCombo, AddCartComboInput.class)
                 .retrieve()
-                .toBodilessEntity();
-
-        return getCart(userId);
+                .bodyToMono(Void.class)
+                .then(getCart(userId));
     }
 
     @Override
-    public CartTotal removeFromCart(Integer userId, UUID productId) {
-        cartClient.delete()
+    public Mono<CartTotal> removeFromCart(Integer userId, UUID productId) {
+        return cartClient.delete()
                 .uri("/{userId}/{productId}", userId, productId)
                 .retrieve()
-                .toBodilessEntity();
-
-        return getCart(userId);
+                .bodyToMono(Void.class)
+                .then(getCart(userId));
     }
 
     @Override
-    public CartTotal clearCart(Integer userId) {
-        cartClient.delete()
+    public Mono<CartTotal> clearCart(Integer userId) {
+        return cartClient.delete()
                 .uri("/{userId}", userId)
                 .retrieve()
-                .toBodilessEntity();
-
-        return getCart(userId);
+                .bodyToMono(Void.class)
+                .then(getCart(userId));
     }
 }

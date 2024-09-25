@@ -11,6 +11,8 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,37 +27,36 @@ public class ProductController {
     }
 
     @QueryMapping
-    public List<Combo> allCombos() {
+    public Flux<Combo> allCombos() {
         return productResolver.getAll();
     }
 
     @QueryMapping
-    public Combo comboByUuid(@Argument @NotEmpty @org.hibernate.validator.constraints.UUID String uuid) {
+    public Mono<Combo> comboByUuid(@Argument @NotEmpty @org.hibernate.validator.constraints.UUID String uuid) {
         return productResolver.searchByUuid(UUID.fromString(uuid));
     }
 
     @QueryMapping
-    public List<Combo> combosByName(@Argument @NotEmpty String name) {
+    public Flux<Combo> combosByName(@Argument @NotEmpty String name) {
         return productResolver.searchByName(name);
     }
 
     @MutationMapping
-    public Combo createCombo(@Argument(name = "input") @Valid CreateCombo combo) {
+    public Mono<Combo> createCombo(@Argument(name = "input") @Valid CreateCombo combo) {
         return productResolver.addCombo(combo);
     }
 
     @MutationMapping
-    public void updateCombo(
+    public Mono<Void> updateCombo(
             @Argument @NotEmpty
             @org.hibernate.validator.constraints.UUID String uuid,
             @Argument(name = "input") @Valid UpdateCombo combo
     ) {
-        productResolver.updateCombo(UUID.fromString(uuid), combo);
+        return productResolver.updateCombo(UUID.fromString(uuid), combo);
     }
 
     @MutationMapping
-    public void deleteCombo(@Argument @org.hibernate.validator.constraints.UUID String uuid) {
-        productResolver.deleteCombo(UUID.fromString(uuid));
+    public Mono<Void> deleteCombo(@Argument @org.hibernate.validator.constraints.UUID String uuid) {
+        return productResolver.deleteCombo(UUID.fromString(uuid));
     }
-
 }

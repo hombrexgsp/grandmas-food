@@ -29,12 +29,11 @@ dependencies {
     compileOnly(Libraries.lombok)
     annotationProcessor(Libraries.lombok)
 
-    implementation(Libraries.springboot)
     implementation(Libraries.springbootGraphQl)
     implementation(Libraries.springbootValidation)
     implementation(Libraries.vavr)
     implementation(Libraries.swagger)
-    implementation(Libraries.springbootWeb)
+    implementation(Libraries.springbootWebFlux)
     implementation(Libraries.httpcomponentsClient)
 
 

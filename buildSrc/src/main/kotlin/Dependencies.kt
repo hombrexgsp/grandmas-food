@@ -8,6 +8,7 @@ object Libraries {
     const val springbootRedis = "org.springframework.boot:spring-boot-starter-data-redis"
     const val springbootValidation = "org.springframework.boot:spring-boot-starter-validation"
     const val springbootWeb = "org.springframework.boot:spring-boot-starter-web"
+    const val springbootWebFlux = "org.springframework.boot:spring-boot-starter-webflux"
     const val mapStruct = "org.mapstruct:mapstruct:1.6.0"
     const val mapStructProcessor = "org.mapstruct:mapstruct-processor:1.6.0"
     const val vavr = "io.vavr:vavr:0.10.4"

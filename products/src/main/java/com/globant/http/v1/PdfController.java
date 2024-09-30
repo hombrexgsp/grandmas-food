@@ -1,4 +1,4 @@
-package com.globant.http;
+package com.globant.http.v1;
 
 
 import com.globant.components.GenerateMenuPdf;

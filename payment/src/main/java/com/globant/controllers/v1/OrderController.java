@@ -1,4 +1,4 @@
-package com.globant.controllers;
+package com.globant.controllers.v1;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

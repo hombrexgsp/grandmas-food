@@ -1,11 +1,10 @@
-package com.globant.http;
+package com.globant.http.v1;
 
 import com.globant.domain.cart.AddCartCombo;
 import domain.cart.CartTotal;
 import com.globant.services.ShoppingCart;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,7 @@
-package com.globant.controller;
+package com.globant.controller.v1;
 
 import com.globant.dto.UserDto;
+import domain.http.version.ApiVersion;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;

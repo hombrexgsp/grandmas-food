@@ -1,7 +1,7 @@
 package domain.combo.error.ComboException;
 
-public class ComboDuplicatedName extends RuntimeException {
-    public ComboDuplicatedName(String message) {
-        super(message);
+public final class ComboDuplicatedName extends RuntimeException {
+    public ComboDuplicatedName(String name) {
+        super(STR."Combo with name \{name} already exists");
     }
 }

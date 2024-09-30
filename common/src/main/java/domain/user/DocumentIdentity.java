@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DocumentIdentity {
-    private DocumentType documentType;
     private Long documentNumber;
+    private DocumentType documentType;
 }

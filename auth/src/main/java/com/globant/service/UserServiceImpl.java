@@ -7,7 +7,7 @@ import domain.combo.error.UserException.NotFieldsUpdatedException;
 import domain.combo.error.UserException.UserNotFoundException;
 import com.globant.mapper.UserMapper;
 import com.globant.model.User;
-import com.globant.model.identity.DocumentIdentity;
+import domain.user.DocumentIdentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.globant.repository.UserRepository;
@@ -44,12 +44,12 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserDto createUser(UserDto userDto) {
         if(isUserDtoInvalidOrIncomplete(userDto)){
-            throw new InvalidOrIncompleteUserException("User data is invalid or incomplete");
+            throw new InvalidOrIncompleteUserException();
         }
 
         DocumentIdentity documentIdentity = userDto.getDocumentIdentity();
         if (userRepository.existsByDocumentDocumentNumber(documentIdentity.getDocumentNumber())) {
-            throw new DuplicateUserException("User with document: " + documentIdentity.getDocumentNumber() + " already exists");
+            throw new DuplicateUserException(documentIdentity);
         }
             User newUser = userMapper.toEntity(userDto);
             User savedUser = userRepository.save(newUser);
@@ -64,14 +64,14 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(Long documentNumber, UserDto userDto) {
 
         User existingUser = userRepository.findUserByDocumentNumber(documentNumber)
-                .orElseThrow(() -> new UserNotFoundException("User with document number: " + documentNumber + " not found."));
+                .orElseThrow(() -> new UserNotFoundException(documentNumber));
 
         if(!documentNumber.equals(userDto.getDocumentIdentity().getDocumentNumber())){
-            throw new InvalidOrIncompleteUserException("Document number cannot be changed");
+            throw new InvalidOrIncompleteUserException();
         }
 
         if (isUserDtoInvalidOrIncomplete(userDto)) {
-            throw new InvalidOrIncompleteUserException("Values of the customer are invalid or incomplete");
+            throw new InvalidOrIncompleteUserException();
         }
 
         boolean isUpdated = false;
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (!isUpdated) {
-            throw new NotFieldsUpdatedException("Any field is different in this update");
+            throw new NotFieldsUpdatedException();
         }
 
         User updatedUser = userRepository.save(existingUser);
@@ -111,12 +111,12 @@ public class UserServiceImpl implements UserService {
     public UserDto getUserByDocumentNumber(Long documentNumber) {
 
         if(documentNumber == null || documentNumber <=0){
-            throw new InvalidOrIncompleteUserException("Document number is invalid or incomplete");
+            throw new InvalidOrIncompleteUserException();
         }
 
         return userRepository.findUserByDocumentNumber(documentNumber)
                 .map(userMapper::toDto)
-                .orElseThrow(() -> new UserNotFoundException("User with document number: " + documentNumber + " not found."));
+                .orElseThrow(() -> new UserNotFoundException(documentNumber));
 
     }
 
@@ -124,7 +124,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void deleteUser(Long documentNumber) {
         if (!userRepository.existsByDocumentDocumentNumber(documentNumber)) {
-            throw new UserNotFoundException("User with document number: " + documentNumber + " not found.");
+            throw new UserNotFoundException(documentNumber);
         }
 
         userRepository.deleteByDocumentDocumentNumber(documentNumber);
@@ -146,10 +146,10 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> findUserByNameContaining(String firstName) {
 
         List<UserDto> users = userRepository.findUserByNameContaining(firstName)
-                .stream().map(userMapper::toDto).collect(Collectors.toList());
+                .stream().map(userMapper::toDto).toList();
 
-        if(users.isEmpty()){
-            throw new UserNotFoundException("Users with first name '" + firstName + "' not found.");
+        if(users.isEmpty()) {
+            throw new UserNotFoundException(firstName);
         }
 
         return users;

@@ -1,7 +1,9 @@
 package com.globant.domain.error;
 
-public class OrderNotFound extends RuntimeException {
-    public OrderNotFound(String message) {
-        super(message);
+import java.util.UUID;
+
+public final class OrderNotFound extends RuntimeException {
+    public OrderNotFound(UUID orderId) {
+        super(STR."Order with id \{orderId} not found");
     }
 }

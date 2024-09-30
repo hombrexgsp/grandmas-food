@@ -47,7 +47,7 @@ public class OrderService {
         return orderRepository
                 .findByUuid(orderId)
                 .map(orderMapper::fromEntity)
-                .orElseThrow(() -> new OrderNotFound(STR."Order with uuid \{orderId} not found"));
+                .orElseThrow(() -> new OrderNotFound(orderId));
     }
 
     @Transactional(readOnly = true)

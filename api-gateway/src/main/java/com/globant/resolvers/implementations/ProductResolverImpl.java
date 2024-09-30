@@ -6,74 +6,75 @@ import domain.combo.CreateCombo;
 import domain.combo.UpdateCombo;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClient;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.List;
 import java.util.UUID;
 
 @Component
 public class ProductResolverImpl implements ProductResolver {
 
-    private final RestClient restClient;
+    private final WebClient webClient;
 
-    public ProductResolverImpl(RestClient.Builder builder) {
-        this.restClient = builder
+    public ProductResolverImpl(WebClient.Builder builder) {
+        this.webClient = builder
                 .baseUrl("http://localhost:8082")
                 .build();
     }
 
 
     @Override
-    public List<Combo> getAll() {
-        return restClient.get()
+    public Flux<Combo> getAll() {
+        return webClient.get()
                 .uri("/products")
                 .retrieve()
-                .body(new ParameterizedTypeReference<List<Combo>>() {});
+                .bodyToFlux(new ParameterizedTypeReference<Combo>() {});
     }
 
     @Override
-    public Combo searchByUuid(UUID uuid) {
-        return restClient.get()
+    public Mono<Combo> searchByUuid(UUID uuid) {
+        return webClient.get()
                 .uri("/products/{uuid}", uuid)
                 .retrieve()
-                .body(Combo.class);
+                .bodyToMono(Combo.class);
     }
 
     @Override
-    public List<Combo> searchByName(String name) {
-        return restClient.get()
+    public Flux<Combo> searchByName(String name) {
+        return webClient.get()
                 .uri( uriBuilder -> uriBuilder
                         .path("/products/search")
                         .queryParam("q", name)
                         .build())
                 .retrieve()
-                .body(new ParameterizedTypeReference<List<Combo>>() {});
+                .bodyToFlux(Combo.class);
     }
 
     @Override
-    public Combo addCombo(CreateCombo createCombo) {
-        return restClient.post()
+    public Mono<Combo> addCombo(CreateCombo createCombo) {
+        return webClient.post()
                 .uri("/products")
                 .body(createCombo, new ParameterizedTypeReference<CreateCombo>() {})
                 .retrieve()
-                .body(Combo.class);
+                .bodyToMono(Combo.class);
     }
 
     @Override
-    public Void updateCombo(UUID uuid, UpdateCombo updateCombo) {
-        return restClient.put()
+    public Mono<Void> updateCombo(UUID uuid, UpdateCombo updateCombo) {
+        return webClient.put()
                 .uri("/products/{uuid}", uuid)
                 .body(updateCombo, new ParameterizedTypeReference<UpdateCombo>() {})
                 .retrieve()
-                .body(Void.class);
+                .bodyToMono(Void.class);
 
     }
 
     @Override
-    public Void deleteCombo(UUID uuid) {
-        return restClient.delete()
+    public Mono<Void> deleteCombo(UUID uuid) {
+        return webClient.delete()
                 .uri("/products/{uuid}", uuid)
                 .retrieve()
-                .body(Void.class);
+                .bodyToMono(Void.class);
     }
 }

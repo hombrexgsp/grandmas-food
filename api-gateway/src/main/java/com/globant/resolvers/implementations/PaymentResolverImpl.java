@@ -11,6 +11,9 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,14 +23,13 @@ import java.util.UUID;
 @Component
 public class PaymentResolverImpl implements PaymentResolver {
 
-    private final RestClient paymentClient;
-    private final RestClient cartClient;
+    private final WebClient paymentClient;
+    private final WebClient cartClient;
 
     @Autowired
-    public PaymentResolverImpl(RestClient.Builder builder) {
+    public PaymentResolverImpl(WebClient.Builder builder) {
         this.paymentClient = builder
                 .baseUrl("http://localhost:8084/orders")
-                .requestFactory(new HttpComponentsClientHttpRequestFactory())
                 .build();
 
         this.cartClient = builder
@@ -36,34 +38,33 @@ public class PaymentResolverImpl implements PaymentResolver {
     }
 
     @Override
-    public List<CreatedOrder> getAllOrders() {
+    public Flux<CreatedOrder> getAllOrders() {
         return paymentClient.get()
                 .retrieve()
-                .body(new ParameterizedTypeReference<List<CreatedOrder>>() {});
+                .bodyToFlux(CreatedOrder.class);
     }
 
     @Override
-    public CreatedOrder checkout(CheckoutOrder checkoutOrder) {
+    public Mono<CreatedOrder> checkout(CheckoutOrder checkoutOrder) {
         final var cart = cartClient.get()
                 .uri("/{document}", checkoutOrder.documentNumber())
                 .retrieve()
-                .body(new ParameterizedTypeReference<CartTotal>() {});
+                .bodyToMono(CartTotal.class)
+                .map( c ->
+                        new CreateOrder(checkoutOrder.documentNumber(), c, checkoutOrder.extraInformation())
+                );
 
         return paymentClient.post()
-                .body(new CreateOrder(
-                        checkoutOrder.documentNumber(),
-                        cart,
-                        checkoutOrder.extraInformation()
-                ), new ParameterizedTypeReference<CreateOrder>() {})
+                .body(cart, CreateOrder.class)
                 .retrieve()
-                .body(CreatedOrder.class);
+                .bodyToMono(CreatedOrder.class);
     }
 
     @Override
-    public CreatedOrder deliverOrder(UUID orderId, LocalDateTime deliveryTime) {
+    public Mono<CreatedOrder> deliverOrder(UUID orderId, LocalDateTime deliveryTime) {
         return paymentClient.patch()
                 .uri("/{uuid}/delivered/{timestamp}", orderId, deliveryTime)
                 .retrieve()
-                .body(CreatedOrder.class);
+                .bodyToMono(CreatedOrder.class);
     }
 }

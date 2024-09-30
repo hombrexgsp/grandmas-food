@@ -1,15 +1,18 @@
 package com.globant.resolvers;
 
+import com.globant.domain.user.UpdateUserInput;
 import com.globant.domain.user.User;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 public interface UserResolver {
 
-    User createUser(User newUser);
-    List<User> getAllUsers();
-    User updateUser(String documentNumber, User updateUser);
-    boolean deleteUser(String documentNumber);
-    User getUserByDocumentNumber(String documentNumber);
-    List<User> getUserByFirstName(String firstName);
+    Mono<User> createUser(User newUser);
+    Flux<User> getAllUsers();
+    Mono<User> updateUser(String documentNumber, UpdateUserInput updateUserInput);
+    Mono<Boolean> deleteUser(String documentNumber);
+    Mono<User> getUserByDocumentNumber(String documentNumber);
+    Flux<User> getUserByFirstName(String firstName);
 }

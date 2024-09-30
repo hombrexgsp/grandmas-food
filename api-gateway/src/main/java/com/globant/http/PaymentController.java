@@ -12,6 +12,8 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,17 +30,17 @@ public class PaymentController {
     }
 
     @QueryMapping
-    public List<CreatedOrder> allOrders() {
+    public Flux<CreatedOrder> allOrders() {
         return paymentResolver.getAllOrders();
     }
 
     @MutationMapping
-    public CreatedOrder createOrder(@Argument(name = "input") @Valid CheckoutOrder checkoutOrder) {
+    public Mono<CreatedOrder> createOrder(@Argument(name = "input") @Valid CheckoutOrder checkoutOrder) {
         return paymentResolver.checkout(checkoutOrder);
     }
 
     @MutationMapping
-    public CreatedOrder deliverOrder(
+    public Mono<CreatedOrder> deliverOrder(
             @Argument @UUID String orderId,
             @Argument @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String deliveryTime
     ) {
@@ -47,4 +49,5 @@ public class PaymentController {
                 LocalDateTime.from(DateTimeFormatter.ISO_DATE_TIME.parse(deliveryTime))
         );
     }
+
 }

@@ -12,6 +12,7 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import reactor.core.publisher.Mono;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,21 +21,21 @@ public class CartController {
     private final CartResolver cartResolver;
 
     @QueryMapping
-    public CartTotal getCart(
+    public Mono<CartTotal> getCart(
             @Argument @Positive @Digits(integer = 20, fraction = 0) Integer documentNumber
     ) {
         return cartResolver.getCart(documentNumber);
     }
 
     @MutationMapping
-    public CartTotal addToCart(
+    public Mono<CartTotal> addToCart(
             @Argument @Positive @Digits(integer = 20, fraction = 0) Integer documentNumber,
             @Argument @Valid AddCartComboInput cartCombo) {
         return cartResolver.addToCart(documentNumber, cartCombo);
     }
 
     @MutationMapping
-    public CartTotal removeFromCart(
+    public Mono<CartTotal> removeFromCart(
             @Argument @Positive @Digits(integer = 20, fraction = 0) Integer documentNumber,
             @Argument @UUID String productId
     ) {
@@ -42,7 +43,7 @@ public class CartController {
     }
 
     @MutationMapping
-    public CartTotal clearCart(@Argument @Positive @Digits(integer = 20, fraction = 0) Integer documentNumber) {
+    public Mono<CartTotal> clearCart(@Argument @Positive @Digits(integer = 20, fraction = 0) Integer documentNumber) {
         return cartResolver.clearCart(documentNumber);
     }
 }

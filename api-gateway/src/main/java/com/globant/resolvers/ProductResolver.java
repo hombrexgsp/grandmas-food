@@ -4,6 +4,8 @@ import domain.combo.Combo;
 import domain.combo.CreateCombo;
 import domain.combo.UpdateCombo;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,12 +13,12 @@ import java.util.UUID;
 public interface ProductResolver {
 
     // Queries
-    List<Combo> getAll();
-    Combo searchByUuid(UUID uuid);
-    List<Combo> searchByName(String name);
+    Flux<Combo> getAll();
+    Mono<Combo> searchByUuid(UUID uuid);
+    Flux<Combo> searchByName(String name);
 
     // Mutations
-    Combo addCombo(CreateCombo createCombo);
-    Void updateCombo(UUID uuid, UpdateCombo updateCombo);
-    Void deleteCombo(UUID uuid);
+    Mono<Combo> addCombo(CreateCombo createCombo);
+    Mono<Void> updateCombo(UUID uuid, UpdateCombo updateCombo);
+    Mono<Void> deleteCombo(UUID uuid);
 }

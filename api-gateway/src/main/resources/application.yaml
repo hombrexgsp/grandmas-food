@@ -1,5 +1,5 @@
 server:
-  port: 4000
+  port: ${GRANDMAS_FOOD_SERVICE_API_GATEWAY_PORT}
 
 spring:
   graphql:

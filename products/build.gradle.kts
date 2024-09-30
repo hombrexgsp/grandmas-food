@@ -33,6 +33,8 @@ dependencies {
     annotationProcessor(Libraries.mapStructProcessor)
     annotationProcessor(Libraries.vavrMatchProcessor)
 
+    implementation("org.apache.pdfbox:pdfbox:2.0.28")
+
     implementation(Libraries.springboot)
     implementation(Libraries.springbootWeb)
     implementation(Libraries.springbootValidation)
@@ -40,15 +42,19 @@ dependencies {
     implementation(Libraries.mapStruct)
     implementation(Libraries.vavr)
     implementation(Libraries.varvMatch)
+    implementation(Libraries.swagger)
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
 
-    testImplementation(Testing.springWebflux)
-    testImplementation(Testing.springbootStarter)
-
-    testRuntimeOnly(Testing.junit)
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+    }
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("com.jayway.jsonpath:json-path")
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    jvmArgs("--enable-preview")
 }
 
 tasks.withType<JavaCompile> {

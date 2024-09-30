@@ -1,7 +1,8 @@
 rootProject.name = "grandmas-food"
 include("auth")
 include("common")
-include("shopping-cart")
+include("payment")
 include("products")
 include("payment")
+include("shopping-cart")
 include("api-gateway")

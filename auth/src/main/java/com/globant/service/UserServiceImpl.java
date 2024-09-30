@@ -1,10 +1,10 @@
 package com.globant.service;
 
 import com.globant.dto.UserDto;
-import com.globant.exception.customException.DuplicateUserException;
-import com.globant.exception.customException.InvalidOrIncompleteUserException;
-import com.globant.exception.customException.NotFieldsUpdatedException;
-import com.globant.exception.customException.UserNotFoundException;
+import domain.combo.error.UserException.DuplicateUserException;
+import domain.combo.error.UserException.InvalidOrIncompleteUserException;
+import domain.combo.error.UserException.NotFieldsUpdatedException;
+import domain.combo.error.UserException.UserNotFoundException;
 import com.globant.mapper.UserMapper;
 import com.globant.model.User;
 import com.globant.model.identity.DocumentIdentity;
@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 import com.globant.repository.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.Document;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,6 +43,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto createUser(UserDto userDto) {
+        if(isUserDtoInvalidOrIncomplete(userDto)){
+            throw new InvalidOrIncompleteUserException("User data is invalid or incomplete");
+        }
+
         DocumentIdentity documentIdentity = userDto.getDocumentIdentity();
         if (userRepository.existsByDocumentDocumentNumber(documentIdentity.getDocumentNumber())) {
             throw new DuplicateUserException("User with document: " + documentIdentity.getDocumentNumber() + " already exists");
@@ -107,15 +109,14 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public UserDto getUserByDocumentNumber(Long documentNumber) {
-        return Optional.ofNullable(documentNumber).
-                filter(docNum -> docNum > 0)
-                .map(docNum -> userRepository.findUserByDocumentNumber(docNum)
-                        .map(userMapper::toDto)
-                        .orElseThrow(() -> new UserNotFoundException("User with document " + documentNumber + " not found")))
-                .orElseThrow(() -> new InvalidOrIncompleteUserException("Invalid or incomplete document number (must be a number, without characters"));
 
-                //userRepository.findUserByDocumentNumber(documentNumber).map(userMapper::toDto)
-                //.orElseThrow(() -> new UserNotFoundException("User with document " + documentNumber + " not found."));
+        if(documentNumber == null || documentNumber <=0){
+            throw new InvalidOrIncompleteUserException("Document number is invalid or incomplete");
+        }
+
+        return userRepository.findUserByDocumentNumber(documentNumber)
+                .map(userMapper::toDto)
+                .orElseThrow(() -> new UserNotFoundException("User with document number: " + documentNumber + " not found."));
 
     }
 
@@ -143,7 +144,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> findUserByNameContaining(String firstName) {
-        return userRepository.findUserByNameContaining(firstName)
+
+        List<UserDto> users = userRepository.findUserByNameContaining(firstName)
                 .stream().map(userMapper::toDto).collect(Collectors.toList());
+
+        if(users.isEmpty()){
+            throw new UserNotFoundException("Users with first name '" + firstName + "' not found.");
+        }
+
+        return users;
     }
 }

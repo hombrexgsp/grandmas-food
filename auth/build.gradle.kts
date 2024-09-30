@@ -25,21 +25,22 @@ repositories {
 
 dependencies {
     implementation(project(":common"))
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-
+    implementation(Libraries.springbootValidation)
+    implementation(Libraries.springbootWeb)
     compileOnly(Libraries.lombok)
     annotationProcessor(Libraries.lombok)
-
     implementation(Libraries.springboot)
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.postgresql:postgresql")
+    implementation(Libraries.dataJpa)
+    implementation(Libraries.postgresql)
+    implementation(Libraries.springbootDevtools)
+    implementation(Libraries.swagger)
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0-rc1")
 
-
-    testImplementation(Testing.springWebflux)
-    testImplementation(Testing.springbootStarter)
-
-    testRuntimeOnly(Testing.junit)
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+    }
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("com.jayway.jsonpath:json-path")
 }
 
 tasks.withType<Test> {
@@ -49,4 +50,3 @@ tasks.withType<Test> {
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("--enable-preview")
 }
-

@@ -48,7 +48,7 @@ public class CartController {
     @DeleteMapping("/{document}/{productId}")
     public ResponseEntity<Void> removeProduct(
             @PathVariable @Positive @Digits(integer = 20, fraction = 0) Long document,
-            @PathVariable @NotBlank UUID productId
+            @PathVariable UUID productId
     ) {
         shoppingCart.removeProduct(document, productId);
         return ResponseEntity.noContent().build();

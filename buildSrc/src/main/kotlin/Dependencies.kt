@@ -19,6 +19,8 @@ object Libraries {
     const val postgresql = "org.postgresql:postgresql"
     const val swagger = "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0"
     const val httpcomponentsClient = "org.apache.httpcomponents.client5:httpclient5:5.3.1"
+    const val qrGenJava = "com.github.kenglxn.QRGen:javase:3.0.1"
+
 }
 
 object Testing {

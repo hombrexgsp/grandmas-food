@@ -21,7 +21,7 @@ configurations {
 
 repositories {
     mavenCentral()
-
+    maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
@@ -44,6 +44,7 @@ dependencies {
     implementation(Libraries.varvMatch)
     implementation(Libraries.swagger)
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
+    implementation(Libraries.qrGenJava)
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

@@ -1,4 +1,4 @@
-package com.globant.http;
+package com.globant.http.v1;
 
 import domain.combo.Combo;
 import domain.combo.CreateCombo;
@@ -16,7 +16,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/v1/products")
 public class ProductsController {
 
     private final ComboService comboService;

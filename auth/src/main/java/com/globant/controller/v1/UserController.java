@@ -1,6 +1,7 @@
-package com.globant.controller;
+package com.globant.controller.v1;
 
 import com.globant.dto.UserDto;
+import domain.http.version.ApiVersion;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
@@ -11,7 +12,7 @@ import com.globant.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/v1/users")
 public class UserController {
     private final UserService userService;
 

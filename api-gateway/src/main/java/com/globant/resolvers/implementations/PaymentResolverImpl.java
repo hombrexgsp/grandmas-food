@@ -26,7 +26,7 @@ public class PaymentResolverImpl implements PaymentResolver {
     @Autowired
     public PaymentResolverImpl(RestClient.Builder builder) {
         this.paymentClient = builder
-                .baseUrl("http://localhost:8084/orders")
+                .baseUrl("http://localhost:8084/v1/orders")
                 .requestFactory(new HttpComponentsClientHttpRequestFactory())
                 .build();
 

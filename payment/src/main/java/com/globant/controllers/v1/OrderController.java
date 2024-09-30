@@ -1,4 +1,4 @@
-package com.globant.controllers;
+package com.globant.controllers.v1;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +21,7 @@ import com.globant.service.OrderService;
 
 @RestController
 @Slf4j
-@RequestMapping("/orders")
+@RequestMapping("/v1/orders")
 public class OrderController {
 
     private final OrderService orderService;

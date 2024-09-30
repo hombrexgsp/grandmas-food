@@ -1,11 +1,10 @@
-package com.globant.http;
+package com.globant.http.v1;
 
 import com.globant.domain.cart.AddCartCombo;
 import domain.cart.CartTotal;
 import com.globant.services.ShoppingCart;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/v1/cart")
 public class CartController {
 
     private final ShoppingCart shoppingCart;
@@ -23,11 +22,12 @@ public class CartController {
     }
 
     @PostMapping("/{document}")
-    public void addToCart (
+    public ResponseEntity<Void> addToCart (
             @PathVariable @Positive @Digits(integer = 20, fraction = 0) Long document,
             @Valid @RequestBody AddCartCombo combo
     ) {
         shoppingCart.add(document, combo.productId(), combo.quantity());
+        return ResponseEntity.status(200).build();
     }
 
     @GetMapping("/{document}")

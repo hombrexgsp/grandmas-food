@@ -1,4 +1,4 @@
-package com.globant.http;
+package com.globant.http.v1;
 
 
 import com.globant.components.GenerateMenuPdf;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.ByteArrayInputStream;
 
 @RestController
-@RequestMapping("/products/menu")
+@RequestMapping("/v1/products/menu")
 public class PdfController {
 
     private final GenerateMenuPdf generateMenuPdf;

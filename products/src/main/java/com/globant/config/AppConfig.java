@@ -1,8 +1,8 @@
 package com.globant.config;
 
-import com.globant.components.GenerateMenuPdf;
+import com.globant.components.GenerateMenu;
 import com.globant.service.ComboService;
-import com.globant.service.PdfService;
+import com.globant.service.MenuService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
     @Bean
-    public GenerateMenuPdf generateMenuPdf(ComboService comboService, PdfService pdfService){
-        return new GenerateMenuPdf(comboService, pdfService);
+    public GenerateMenu generateMenuPdf(ComboService comboService, MenuService pdfService){
+        return new GenerateMenu(comboService, pdfService);
     }
 }

@@ -18,7 +18,7 @@ public class ProductResolverImpl implements ProductResolver {
 
     public ProductResolverImpl(RestClient.Builder builder) {
         this.restClient = builder
-                .baseUrl("http://localhost:8082")
+                .baseUrl("http://localhost:8082/v1")
                 .build();
     }
 

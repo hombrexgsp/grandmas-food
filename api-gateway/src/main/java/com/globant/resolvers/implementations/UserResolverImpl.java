@@ -14,7 +14,7 @@ public class UserResolverImpl implements UserResolver {
     private final RestClient userClient;
 
     public UserResolverImpl(RestClient.Builder restClientBuilder) {
-        this.userClient = restClientBuilder.baseUrl("http://localhost:8081/users").build();
+        this.userClient = restClientBuilder.baseUrl("http://localhost:8081/v1/users").build();
     }
 
     public User createUser(User newUser){
@@ -26,8 +26,7 @@ public class UserResolverImpl implements UserResolver {
     }
 
     public List<User> getAllUsers(){
-        return userClient.get().retrieve().body(new ParameterizedTypeReference<List<User>>() {
-        });
+        return userClient.get().retrieve().body(new ParameterizedTypeReference<List<User>>() {});
     }
 
     public User updateUser(String documentNumber, User updateUser){
@@ -60,8 +59,4 @@ public class UserResolverImpl implements UserResolver {
                 .retrieve()
                 .body(new ParameterizedTypeReference<List<User>>() {});
     }
-
-
-
-
 }
